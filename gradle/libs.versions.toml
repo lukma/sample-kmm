@@ -1,0 +1,13 @@
+[versions]
+kotlin = "1.7.10"
+
+[libraries]
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+android-gradle = { module = "com.android.tools.build:gradle", version = "7.2.1" }
+
+[bundles]
+classpath = [
+    "kotlin.gradle",
+    "android.gradle"
+]
