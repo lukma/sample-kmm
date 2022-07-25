@@ -26,6 +26,7 @@ This is **Kotlin Multiplatform** project for learning purpose.
 ## Dependencies
 
 - [kotlinx.coroutines](https://kotlinlang.org/docs/coroutines-guide.html) is a rich library for coroutines developed by JetBrains.
+- [kotlinx.serialization](https://kotlinlang.org/docs/serialization.html) consists of a compiler plugin, that generates visitor code for serializable classes, runtime library with core serialization API and support libraries with various serialization formats.
 
 ## Project Structure
 
