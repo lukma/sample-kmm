@@ -28,6 +28,7 @@ This is **Kotlin Multiplatform** project for learning purpose.
 - [kotlinx.coroutines](https://kotlinlang.org/docs/coroutines-guide.html) is a rich library for coroutines developed by JetBrains.
 - [kotlinx.serialization](https://kotlinlang.org/docs/serialization.html) consists of a compiler plugin, that generates visitor code for serializable classes, runtime library with core serialization API and support libraries with various serialization formats.
 - [MockK](https://mockk.io) is mocking library for Kotlin.
+- [Koin](https://insert-koin.io) a pragmatic lightweight dependency injection framework for Kotlin.
 
 ## Project Structure
 

@@ -26,6 +26,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization.json)
+                implementation(libs.koin.core)
             }
         }
         val commonTest by getting {
@@ -33,9 +34,14 @@ kotlin {
                 implementation(libs.kotlin.test)
                 implementation(libs.kotlinx.coroutines.test)
                 implementation(libs.mockk.common)
+                implementation(libs.koin.test)
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.koin.android)
+            }
+        }
         val androidTest by getting {
             dependencies {
                 implementation(libs.mockk.core)
