@@ -25,7 +25,7 @@ This is **Kotlin Multiplatform** project for learning purpose.
 
 ## Dependencies
 
-- 
+- [kotlinx.coroutines](https://kotlinlang.org/docs/coroutines-guide.html) is a rich library for coroutines developed by JetBrains.
 
 ## Project Structure
 
