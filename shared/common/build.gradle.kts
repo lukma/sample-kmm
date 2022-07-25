@@ -30,6 +30,7 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.koin.core)
                 implementation(libs.bundles.sqldelight.common)
+                implementation(libs.bundles.ktor.common)
             }
         }
         val commonTest by getting {
@@ -38,12 +39,14 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.test)
                 implementation(libs.mockk.common)
                 implementation(libs.koin.test)
+                implementation(libs.ktor.mock)
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation(libs.koin.android)
                 implementation(libs.sqldelight.android)
+                implementation(libs.ktor.okhttp)
             }
         }
         val androidTest by getting {
@@ -62,6 +65,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.sqldelight.native)
+                implementation(libs.ktor.darwin)
             }
         }
         val iosX64Test by getting

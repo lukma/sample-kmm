@@ -1,6 +1,7 @@
 package com.gplay.core.util
 
 import com.gplay.core.initKoin
+import io.ktor.client.engine.mock.*
 import io.mockk.mockk
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.stopKoin
@@ -16,6 +17,7 @@ interface AutoInitKoinTest : KoinTest {
         initKoin(appConfig = mockk(relaxed = true))
         val testPlatformModule = module {
             single { createTestSqlDriver() }
+            single { MockEngine { respondOk() } }
         }
         loadKoinModules(testPlatformModule)
     }
