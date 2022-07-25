@@ -4,6 +4,7 @@ kotlinx-coroutines = "1.6.4"
 kotlinx-serialization = "1.4.0-RC"
 mockk = "1.12.4"
 koin = "3.2.0"
+sqldelight = "2.0.0-alpha03"
 
 [libraries]
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -18,11 +19,25 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+sqldelight-gradle = { module = "app.cash.sqldelight:gradle-plugin", version.ref = "sqldelight" }
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
+sqldelight-primitiveadapters = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 android-gradle = { module = "com.android.tools.build:gradle", version = "7.2.1" }
 
 [bundles]
 classpath = [
     "kotlin.gradle",
     "kotlinx.serialization.gradle",
-    "android.gradle"
+    "android.gradle",
+    "sqldelight.gradle"
 ]
+sqldelight-common = [
+    "sqldelight.runtime",
+    "sqldelight.primitiveadapters"
+]
+
+[plugins]
+sqldelight = { id = "app.cash.sqldelight" }

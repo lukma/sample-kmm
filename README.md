@@ -29,6 +29,7 @@ This is **Kotlin Multiplatform** project for learning purpose.
 - [kotlinx.serialization](https://kotlinlang.org/docs/serialization.html) consists of a compiler plugin, that generates visitor code for serializable classes, runtime library with core serialization API and support libraries with various serialization formats.
 - [MockK](https://mockk.io) is mocking library for Kotlin.
 - [Koin](https://insert-koin.io) a pragmatic lightweight dependency injection framework for Kotlin.
+- [SQLDelight](https://cashapp.github.io/sqldelight) generates typesafe kotlin APIs from your SQL statements.
 
 ## Project Structure
 
