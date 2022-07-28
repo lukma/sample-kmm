@@ -6,13 +6,11 @@ import com.gplay.core.data.db.AppDatabase
 import com.gplay.core.domain.common.exception.APIError
 import com.gplay.core.util.DatabaseTest
 import com.gplay.core.util.TestSamples
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.test.runTest
 import org.koin.test.get
 import org.koin.test.inject
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
+import kotlin.test.*
 
 class LocalAuthDataSourceTest : DatabaseTest {
     private val driver: SqlDriver by inject()
@@ -63,6 +61,33 @@ class LocalAuthDataSourceTest : DatabaseTest {
         // when
         val actual = runCatching {
             dataSource.storeToken(username = TestSamples.username, token = TestSamples.token)
+        }
+
+        // then
+        assertFailsWith<APIError.DatabaseFailure> { actual.getOrThrow() }
+    }
+
+    @Test
+    fun `check is signed in got value`() = runTest {
+        // given
+        database.authQueries
+            .upsert(auth = TestSamples.token.toLocalActiveAuth(username = TestSamples.username))
+
+        // when
+        val actual = dataSource.isSignedIn().single()
+
+        // then
+        assertTrue(actual)
+    }
+
+    @Test
+    fun `check is signed in got failure`() = runTest {
+        // given
+        driver.close()
+
+        // when
+        val actual = runCatching {
+            dataSource.isSignedIn().single()
         }
 
         // then
