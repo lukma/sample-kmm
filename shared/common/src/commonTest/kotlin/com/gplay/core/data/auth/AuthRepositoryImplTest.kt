@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
+import kotlin.test.assertTrue
 
 class AuthRepositoryImplTest {
     private val localAuthDataSource: AuthDataSource = mockk()
@@ -87,6 +88,33 @@ class AuthRepositoryImplTest {
         // when
         val actual = runCatching {
             authRepository.storeToken(username = TestSamples.username, token = TestSamples.token)
+        }
+
+        // then
+        assertFails { actual.getOrThrow() }
+    }
+
+    @Test
+    fun `check is signed in got value`() = runTest {
+        // given
+        coEvery { localAuthDataSource.isSignedIn() } returns flow { emit(true) }
+
+        // when
+        val actual = authRepository.isSignedIn().single()
+
+        // then
+        assertTrue(actual)
+        coVerify { localAuthDataSource.isSignedIn() }
+    }
+
+    @Test
+    fun `check is signed in got failure`() = runTest {
+        // given
+        coEvery { localAuthDataSource.isSignedIn() } returns flow { throw Error() }
+
+        // when
+        val actual = runCatching {
+            authRepository.isSignedIn().single()
         }
 
         // then

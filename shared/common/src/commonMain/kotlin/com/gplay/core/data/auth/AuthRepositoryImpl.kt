@@ -16,4 +16,8 @@ internal class AuthRepositoryImpl(
     override suspend fun storeToken(username: String, token: Token) {
         localAuthDataSource.storeToken(username, token)
     }
+
+    override suspend fun isSignedIn(): Flow<Boolean> {
+        return localAuthDataSource.isSignedIn()
+    }
 }

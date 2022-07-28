@@ -24,4 +24,8 @@ internal class NetworkAuthDataSource(private val httpClient: HttpClient) : AuthD
     override suspend fun storeToken(username: String, token: Token) {
         throw NotImplementedError()
     }
+
+    override suspend fun isSignedIn(): Flow<Boolean> {
+        throw NotImplementedError()
+    }
 }

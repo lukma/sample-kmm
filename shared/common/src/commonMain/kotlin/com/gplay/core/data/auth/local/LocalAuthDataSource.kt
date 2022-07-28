@@ -23,4 +23,8 @@ internal class LocalAuthDataSource(private val database: AppDatabase) : AuthData
             throw APIError.DatabaseFailure(ex)
         }
     }
+
+    override suspend fun isSignedIn(): Flow<Boolean> {
+        throw NotImplementedError()
+    }
 }

@@ -27,7 +27,7 @@ class SignInUseCaseTest {
         coJustRun { authRepository.storeToken(any(), any()) }
 
         // when
-        val actual = useCase.invoke(useCaseParam)
+        val actual = useCase(useCaseParam)
 
         // then
         val expected = Result.success(Unit)
@@ -44,7 +44,7 @@ class SignInUseCaseTest {
         coEvery { authRepository.signIn(any(), any()) } returns flow { throw Error() }
 
         // when
-        val actual = useCase.invoke(useCaseParam)
+        val actual = useCase(useCaseParam)
 
         // then
         assertFails { actual.getOrThrow() }
