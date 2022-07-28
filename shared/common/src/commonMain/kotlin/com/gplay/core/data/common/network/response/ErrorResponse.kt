@@ -14,10 +14,20 @@ internal data class ErrorResponse(
 
 @Serializable
 internal enum class ErrorCode {
+    @SerialName("GE-201")
+    UsernameNotFound,
+
+    @SerialName("GE-202")
+    PasswordMissmatch,
+
+    @SerialName("GE-301")
+    AccountInactive,
 }
 
 internal fun ErrorResponse.toApiError(): APIError {
     return when (code) {
-        else -> throw NotImplementedError()
+        ErrorCode.UsernameNotFound -> APIError.UsernameNotFound(message = description)
+        ErrorCode.PasswordMissmatch -> APIError.PasswordMissmatch(message = description)
+        ErrorCode.AccountInactive -> APIError.AccountInactive(message = description)
     }
 }
