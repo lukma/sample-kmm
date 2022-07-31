@@ -3,6 +3,7 @@ package com.gplay.app.initializer
 import android.content.Context
 import androidx.startup.Initializer
 import com.gplay.app.BuildConfig
+import com.gplay.app.di.viewModelModule
 import com.gplay.core.config.AppConfig
 import com.gplay.core.initKoin
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +16,11 @@ class KoinInitializer : Initializer<Unit> {
         )
         initKoin(appConfig) {
             androidContext(context)
+            modules(
+                listOf(
+                    viewModelModule,
+                )
+            )
         }
     }
 

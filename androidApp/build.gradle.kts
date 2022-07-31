@@ -83,14 +83,18 @@ dependencies {
     // Compose Integration
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
-    implementation(libs.koin.compose)
     implementation(libs.constraint.compose)
+
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk.core)
+    testImplementation(libs.koin.test)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.compose.ui.test.junit)
