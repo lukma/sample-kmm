@@ -1,4 +1,4 @@
-package com.gplay.app
+package com.gplay.app.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
