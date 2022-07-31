@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
+
 plugins {
     kotlin("android")
     id("com.android.application")
@@ -25,6 +28,23 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+        }
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+
+            val apiProp = Properties().apply {
+                load(FileInputStream(file("../apis.properties")))
+            }
+            buildConfigField(
+                "String",
+                "API_HOST",
+                "\"${apiProp.getProperty("DEV_API_HOST")}\""
             )
         }
     }
