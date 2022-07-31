@@ -10,9 +10,11 @@ import com.gplay.app.feature.login.LoginScreen
 import com.gplay.app.ui.theme.GPlayTheme
 
 @Composable
-fun GPlayApp() {
+fun GPlayApp(
+    startDestination: String,
+) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = HomeScreen.route) {
+    NavHost(navController, startDestination) {
         HomeScreen.build(this)
         LoginScreen.build(this)
     }
@@ -22,6 +24,8 @@ fun GPlayApp() {
 @Composable
 private fun DefaultPreview() {
     GPlayTheme {
-        GPlayApp()
+        GPlayApp(
+            startDestination = HomeScreen.route,
+        )
     }
 }
