@@ -11,4 +11,5 @@ enableFeaturePreview("VERSION_CATALOGS")
 rootProject.name = "GPlay"
 include(
     ":shared:common",
+    ":androidApp",
 )
