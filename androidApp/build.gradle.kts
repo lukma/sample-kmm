@@ -57,6 +57,7 @@ dependencies {
 
     // Jetpack
     implementation(libs.androidx.core)
+    implementation(libs.androidx.startup)
     implementation(libs.bundles.compose.common)
 
     // Compose Integration
