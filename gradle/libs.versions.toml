@@ -51,7 +51,7 @@ compose-material = { module = "androidx.compose.material3:material3", version = 
 activity-compose = { module = "androidx.activity:activity-compose", version = "1.5.1" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.0" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.5.0" }
-constraint-compose = { module = "androidx.navigation:navigation-compose", version = "1.0.1" }
+constraint-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.0.1" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.4.0" }
 
 [bundles]
