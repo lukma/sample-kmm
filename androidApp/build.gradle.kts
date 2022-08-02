@@ -92,6 +92,10 @@ dependencies {
     implementation(libs.androidx.startup)
     implementation(libs.bundles.compose.common)
 
+    // Material
+    implementation(libs.material3.compose)
+    implementation(libs.material.compose.icon)
+
     // Compose Integration
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
