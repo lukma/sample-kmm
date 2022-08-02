@@ -13,10 +13,12 @@ import com.gplay.app.ui.theme.GPlayTheme
 fun GPlayApp(
     startDestination: String,
 ) {
-    val navController = rememberNavController()
-    NavHost(navController, startDestination) {
-        HomeScreen.build(this)
-        LoginScreen.build(this)
+    GPlayScaffold {
+        val navController = rememberNavController()
+        NavHost(navController, startDestination) {
+            HomeScreen.build(this)
+            LoginScreen.build(this)
+        }
     }
 }
 
