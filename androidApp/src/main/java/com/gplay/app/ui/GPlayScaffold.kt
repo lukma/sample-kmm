@@ -4,20 +4,17 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun GPlayScaffold(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val scope = rememberCoroutineScope()
-    val scaffoldController = remember { SimpleScaffoldController(scope, snackbarHostState) }
+    val scaffoldController = remember { SimpleScaffoldController(snackbarHostState) }
 
     CompositionLocalProvider(LocalScaffoldController provides scaffoldController) {
         Scaffold(
@@ -28,15 +25,14 @@ fun GPlayScaffold(
 }
 
 interface ScaffoldController {
-    fun showSnackbar(message: String?)
+    suspend fun showSnackbar(message: String?): SnackbarResult
 }
 
 private class SimpleScaffoldController(
-    private val scope: CoroutineScope,
     private val snackbarHostState: SnackbarHostState,
-): ScaffoldController {
+) : ScaffoldController {
 
-    override fun showSnackbar(message: String?) {
-        scope.launch { snackbarHostState.showSnackbar(message.orEmpty()) }
+    override suspend fun showSnackbar(message: String?): SnackbarResult {
+       return snackbarHostState.showSnackbar(message.orEmpty())
     }
 }
