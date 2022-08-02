@@ -27,7 +27,7 @@ class LoginViewModelTest {
     @Test
     fun `perform on username changed`() {
         // when
-        viewModel.onUsernameChanged(username = TestSamples.username)
+        viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))
         val actual = viewModel.uiState.value
 
         // then
@@ -38,7 +38,7 @@ class LoginViewModelTest {
     @Test
     fun `perform on password changed`() {
         // when
-        viewModel.onPasswordChanged(password = TestSamples.password)
+        viewModel.sendEvent(LoginUiEvent.TypePassword(TestSamples.password))
         val actual = viewModel.uiState.value
 
         // then
@@ -52,9 +52,9 @@ class LoginViewModelTest {
         coEvery { signInUseCase(any()) } returns Result.success(Unit)
 
         // when
-        viewModel.onUsernameChanged(username = TestSamples.username)
-        viewModel.onPasswordChanged(password = TestSamples.password)
-        viewModel.signIn()
+        viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))
+        viewModel.sendEvent(LoginUiEvent.TypePassword(TestSamples.password))
+        viewModel.sendEvent(LoginUiEvent.SignIn)
         val actual = viewModel.uiState.value
 
         // then
@@ -78,11 +78,15 @@ class LoginViewModelTest {
         coEvery { signInUseCase(any()) } returns Result.failure(TestSamples.error)
 
         // when
-        viewModel.signIn()
+        viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))
+        viewModel.sendEvent(LoginUiEvent.TypePassword(TestSamples.password))
+        viewModel.sendEvent(LoginUiEvent.SignIn)
         val actual = viewModel.uiState.value
 
         // then
         val expected = LoginUiState(
+            username = TestSamples.username,
+            password = TestSamples.password,
             isLoading = false,
             isSignedIn = false,
             error = TestSamples.error,

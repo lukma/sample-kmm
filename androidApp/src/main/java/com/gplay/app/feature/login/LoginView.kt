@@ -24,6 +24,7 @@ import com.gplay.app.R
 import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -33,12 +34,15 @@ fun LoginView(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val scaffoldController = LocalScaffoldController.current
+    val scope = rememberCoroutineScope()
 
     when {
         uiState.isSignedIn -> onSendMainUiEvent(MainUiEvent.CheckIsSignedIn)
-        uiState.error != null -> {
-            scaffoldController.showSnackbar(uiState.error?.message)
-            viewModel.clearError()
+        uiState.error != null -> scope.launch {
+            when (scaffoldController.showSnackbar(uiState.error?.message)) {
+                SnackbarResult.Dismissed -> viewModel.sendEvent(LoginUiEvent.ClearError)
+                else -> { /* no-op */ }
+            }
         }
     }
 
@@ -52,7 +56,7 @@ fun LoginView(
 
         OutlinedTextField(
             value = uiState.username,
-            onValueChange = viewModel::onUsernameChanged,
+            onValueChange = { viewModel.sendEvent(LoginUiEvent.TypeUsername(it)) },
             modifier = Modifier
                 .constrainAs(usernameTextField) {
                     start.linkTo(parent.start)
@@ -71,7 +75,7 @@ fun LoginView(
         var passwordHidden by rememberSaveable { mutableStateOf(true) }
         OutlinedTextField(
             value = uiState.password,
-            onValueChange = viewModel::onPasswordChanged,
+            onValueChange = { viewModel.sendEvent(LoginUiEvent.TypePassword(it)) },
             modifier = Modifier
                 .constrainAs(passwordTextField) {
                     start.linkTo(parent.start)
@@ -98,7 +102,7 @@ fun LoginView(
         )
 
         Button(
-            onClick = viewModel::signIn,
+            onClick = { viewModel.sendEvent(LoginUiEvent.SignIn) },
             modifier = Modifier
                 .constrainAs(signInButton) {
                     top.linkTo(passwordTextField.bottom, margin = 16.dp)
