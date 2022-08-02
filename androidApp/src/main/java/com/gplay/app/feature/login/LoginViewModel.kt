@@ -13,11 +13,15 @@ class LoginViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
     val uiState: StateFlow<LoginUiState> get() = _uiState
 
     fun onUsernameChanged(username: String) {
-        _uiState.tryEmit(uiState.value.copy(username = username))
+        viewModelScope.launch {
+            _uiState.emit(uiState.value.copy(username = username))
+        }
     }
 
     fun onPasswordChanged(password: String) {
-        _uiState.tryEmit(uiState.value.copy(password = password))
+        viewModelScope.launch {
+            _uiState.emit(uiState.value.copy(password = password))
+        }
     }
 
     fun signIn() {
@@ -29,12 +33,18 @@ class LoginViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
             signInUseCase(param)
                 .onFailure {
                     val value = uiState.value.copy(error = it, isLoading = false)
-                    _uiState.tryEmit(value)
+                    _uiState.emit(value)
                 }
                 .onSuccess {
                     val value = uiState.value.copy(isSignedIn = true, isLoading = false)
-                    _uiState.tryEmit(value)
+                    _uiState.emit(value)
                 }
+        }
+    }
+
+    fun clearError() {
+        viewModelScope.launch {
+            _uiState.emit(uiState.value.copy(error = null))
         }
     }
 }
