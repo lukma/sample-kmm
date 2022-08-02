@@ -11,8 +11,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 class LoginViewModelTest {
     private val signInUseCase: SignInUseCase = mockk()
@@ -33,8 +31,8 @@ class LoginViewModelTest {
         val actual = viewModel.uiState.value
 
         // then
-        val expected = TestSamples.username
-        assertEquals(expected, actual.username)
+        val expected = LoginUiState(username = TestSamples.username)
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -44,8 +42,8 @@ class LoginViewModelTest {
         val actual = viewModel.uiState.value
 
         // then
-        val expected = TestSamples.password
-        assertEquals(expected, actual.password)
+        val expected = LoginUiState(password = TestSamples.password)
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -60,7 +58,14 @@ class LoginViewModelTest {
         val actual = viewModel.uiState.value
 
         // then
-        assertTrue(actual.isSignedIn)
+        val expected = LoginUiState(
+            username = TestSamples.username,
+            password = TestSamples.password,
+            isLoading = false,
+            isSignedIn = true,
+        )
+        assertEquals(expected, actual)
+
         val paramSlot = CapturingSlot<SignInUseCase.Param>()
         coVerify { signInUseCase(capture(paramSlot)) }
         assertEquals(TestSamples.username, paramSlot.captured.username)
@@ -77,7 +82,11 @@ class LoginViewModelTest {
         val actual = viewModel.uiState.value
 
         // then
-        assertFalse(actual.isSignedIn)
-        assertEquals(TestSamples.error, actual.error)
+        val expected = LoginUiState(
+            isLoading = false,
+            isSignedIn = false,
+            error = TestSamples.error,
+        )
+        assertEquals(expected, actual)
     }
 }
