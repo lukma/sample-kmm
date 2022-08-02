@@ -70,7 +70,7 @@ class LoginViewModelTest {
     @Test
     fun `perform sign in got failure`() {
         // given
-        coEvery { signInUseCase(any()) } returns Result.failure(Error(TestSamples.errorMessage))
+        coEvery { signInUseCase(any()) } returns Result.failure(TestSamples.error)
 
         // when
         viewModel.signIn()
@@ -78,6 +78,6 @@ class LoginViewModelTest {
 
         // then
         assertFalse(actual.isSignedIn)
-        assertEquals(TestSamples.errorMessage, actual.error)
+        assertEquals(TestSamples.error, actual.error)
     }
 }

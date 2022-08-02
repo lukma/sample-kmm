@@ -2,7 +2,7 @@ package com.gplay.app.util
 
 object TestSamples {
     // Common
-    const val errorMessage = "some error"
+    val error = Error("some error")
 
     // Auth
     const val username = "john.doe@mail.com"

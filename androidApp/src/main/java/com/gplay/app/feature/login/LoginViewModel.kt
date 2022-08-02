@@ -28,7 +28,7 @@ class LoginViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
             }
             signInUseCase(param)
                 .onFailure {
-                    val value = uiState.value.copy(error = it.message.orEmpty(), isLoading = false)
+                    val value = uiState.value.copy(error = it, isLoading = false)
                     _uiState.tryEmit(value)
                 }
                 .onSuccess {
