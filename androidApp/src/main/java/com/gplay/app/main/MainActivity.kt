@@ -36,7 +36,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val uiState by viewModel.uiState.collectAsState()
-                    GPlayApp(uiState)
+                    GPlayApp(
+                        uiState = uiState,
+                        onSendEvent = viewModel::sendEvent,
+                    )
                 }
             }
         }

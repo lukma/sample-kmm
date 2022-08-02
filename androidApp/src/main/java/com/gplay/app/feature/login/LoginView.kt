@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.gplay.app.R
+import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
 import org.koin.androidx.compose.getViewModel
@@ -28,12 +29,13 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun LoginView(
     viewModel: LoginViewModel = getViewModel(),
+    onSendMainUiEvent: (MainUiEvent) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val scaffoldController = LocalScaffoldController.current
 
     when {
-        uiState.isSignedIn -> {}
+        uiState.isSignedIn -> onSendMainUiEvent(MainUiEvent.CheckIsSignedIn)
         uiState.error != null -> {
             scaffoldController.showSnackbar(uiState.error?.message)
             viewModel.clearError()
@@ -115,6 +117,8 @@ fun LoginView(
 @Composable
 private fun DefaultPreview() {
     GPlayTheme {
-        LoginView()
+        LoginView(
+            onSendMainUiEvent = { /* no-op */ },
+        )
     }
 }

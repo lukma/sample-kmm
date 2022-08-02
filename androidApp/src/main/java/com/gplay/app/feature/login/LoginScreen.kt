@@ -3,8 +3,17 @@ package com.gplay.app.feature.login
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import com.gplay.android.navigation.ScreenNavGraph
+import com.gplay.app.main.MainUiEvent
 
-object LoginScreen : ScreenNavGraph {
-    override val route: String = "login"
-    override fun content(): @Composable (NavBackStackEntry) -> Unit = { LoginView() }
+data class LoginScreen(val onSendMainUiEvent: (MainUiEvent) -> Unit) : ScreenNavGraph {
+    override val route: String = routeName
+    override fun content(): @Composable (NavBackStackEntry) -> Unit = {
+        LoginView(
+            onSendMainUiEvent = onSendMainUiEvent,
+        )
+    }
+
+    companion object {
+        const val routeName = "login"
+    }
 }

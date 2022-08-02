@@ -8,5 +8,5 @@ data class MainUiState(
 ) {
 
     val startDestination: String
-        get() = if (isSignedIn) HomeScreen.route else LoginScreen.route
+        get() = if (isSignedIn) HomeScreen.route else LoginScreen.routeName
 }
