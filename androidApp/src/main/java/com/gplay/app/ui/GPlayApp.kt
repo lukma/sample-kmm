@@ -7,15 +7,16 @@ import androidx.navigation.compose.rememberNavController
 import com.gplay.android.navigation.build
 import com.gplay.app.feature.home.HomeScreen
 import com.gplay.app.feature.login.LoginScreen
+import com.gplay.app.main.MainUiState
 import com.gplay.app.ui.theme.GPlayTheme
 
 @Composable
 fun GPlayApp(
-    startDestination: String,
+    uiState: MainUiState,
 ) {
     GPlayScaffold {
         val navController = rememberNavController()
-        NavHost(navController, startDestination) {
+        NavHost(navController = navController, startDestination = uiState.startDestination) {
             HomeScreen.build(this)
             LoginScreen.build(this)
         }
@@ -27,7 +28,7 @@ fun GPlayApp(
 private fun DefaultPreview() {
     GPlayTheme {
         GPlayApp(
-            startDestination = HomeScreen.route,
+            uiState = MainUiState(),
         )
     }
 }

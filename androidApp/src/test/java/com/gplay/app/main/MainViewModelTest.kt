@@ -1,7 +1,5 @@
 package com.gplay.app.main
 
-import com.gplay.app.feature.home.HomeScreen
-import com.gplay.app.feature.login.LoginScreen
 import com.gplay.app.util.CoroutinesTestRule
 import com.gplay.core.domain.auth.usecase.IsSignedInUseCase
 import io.mockk.coEvery
@@ -32,11 +30,11 @@ class MainViewModelTest {
         coEvery { isSignedInUseCase() } returns flow { emit(true) }
 
         // when
-        viewModel.getStartDestination()
-        val actual = viewModel.startDestination.value
+        viewModel.sendEvent(MainUiEvent.CheckIsSignedIn)
+        val actual = viewModel.uiState.value
 
         // then
-        val expected = HomeScreen.route
+        val expected = MainUiState(isSignedIn = true)
         assertEquals(expected, actual)
     }
 
@@ -46,11 +44,11 @@ class MainViewModelTest {
         coEvery { isSignedInUseCase() } returns flow { emit(false) }
 
         // when
-        viewModel.getStartDestination()
-        val actual = viewModel.startDestination.value
+        viewModel.sendEvent(MainUiEvent.CheckIsSignedIn)
+        val actual = viewModel.uiState.value
 
         // then
-        val expected = LoginScreen.route
+        val expected = MainUiState(isSignedIn = false)
         assertEquals(expected, actual)
     }
 }

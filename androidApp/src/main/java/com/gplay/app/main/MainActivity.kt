@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
     init {
         lifecycleScope.launch {
             whenCreated {
-                viewModel.getStartDestination()
+                viewModel.sendEvent(MainUiEvent.CheckIsSignedIn)
             }
         }
     }
@@ -35,8 +35,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val startDestination by viewModel.startDestination.collectAsState()
-                    GPlayApp(startDestination)
+                    val uiState by viewModel.uiState.collectAsState()
+                    GPlayApp(uiState)
                 }
             }
         }
