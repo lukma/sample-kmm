@@ -22,6 +22,14 @@ android {
         }
     }
 
+    testOptions {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
