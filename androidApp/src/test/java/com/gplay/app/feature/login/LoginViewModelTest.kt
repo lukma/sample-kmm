@@ -3,6 +3,11 @@ package com.gplay.app.feature.login
 import com.gplay.app.util.CoroutinesTestRule
 import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.auth.usecase.SignInUseCase
+import com.gplay.core.domain.validation.FieldSpec
+import com.gplay.core.domain.validation.ValidationError
+import com.gplay.core.domain.validation.ValidationState
+import com.gplay.core.domain.validation.ValidationStates
+import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -13,6 +18,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class LoginViewModelTest {
+    private val formValidationUseCase = FormValidationUseCase()
     private val signInUseCase: SignInUseCase = mockk()
     private lateinit var viewModel: LoginViewModel
 
@@ -21,28 +27,75 @@ class LoginViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = LoginViewModel(signInUseCase)
+        viewModel = LoginViewModel(formValidationUseCase, signInUseCase)
     }
 
     @Test
-    fun `perform on username changed`() {
+    fun `perform on username changed with valid value`() {
         // when
         viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))
         val actual = viewModel.uiState.value
 
         // then
-        val expected = LoginUiState(username = TestSamples.username)
+        val expected = LoginUiState(
+            username = TestSamples.username,
+            validations = createValidationValues(
+                custom = Pair(LoginFormSpec.Username, ValidationState.Valid),
+            ),
+        )
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `perform on password changed`() {
+    fun `perform on username changed with empty value`() {
+        // when
+        viewModel.sendEvent(LoginUiEvent.TypeUsername(""))
+        val actual = viewModel.uiState.value
+
+        // then
+        val expected = LoginUiState(
+            validations = createValidationValues(
+                custom = Pair(
+                    LoginFormSpec.Username,
+                    ValidationState.Invalid(ValidationError.FieldBlank),
+                ),
+            ),
+        )
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `perform on password changed with valid value`() {
         // when
         viewModel.sendEvent(LoginUiEvent.TypePassword(TestSamples.password))
         val actual = viewModel.uiState.value
 
         // then
-        val expected = LoginUiState(password = TestSamples.password)
+        val expected = LoginUiState(
+            password = TestSamples.password,
+            validations = createValidationValues(
+                custom = Pair(LoginFormSpec.Password, ValidationState.Valid),
+            ),
+        )
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `perform on password changed with empty value`() {
+        // when
+        viewModel.sendEvent(LoginUiEvent.TypePassword(""))
+        val actual = viewModel.uiState.value
+
+        // then
+        val expected = LoginUiState(
+            validations = createValidationValues(
+                custom = Pair(
+                    LoginFormSpec.Password,
+                    ValidationState.Invalid(ValidationError.FieldBlank),
+                ),
+                default = null,
+            ),
+        )
         assertEquals(expected, actual)
     }
 
@@ -61,8 +114,8 @@ class LoginViewModelTest {
         val expected = LoginUiState(
             username = TestSamples.username,
             password = TestSamples.password,
-            isLoading = false,
             isSignedIn = true,
+            validations = createValidationValues(default = ValidationState.Valid),
         )
         assertEquals(expected, actual)
 
@@ -87,10 +140,18 @@ class LoginViewModelTest {
         val expected = LoginUiState(
             username = TestSamples.username,
             password = TestSamples.password,
-            isLoading = false,
-            isSignedIn = false,
             error = TestSamples.error,
+            validations = createValidationValues(default = ValidationState.Valid),
         )
         assertEquals(expected, actual)
+    }
+
+    private fun createValidationValues(
+        custom: Pair<FieldSpec, ValidationState?>? = null,
+        default: ValidationState? = null,
+    ): ValidationStates {
+        return LoginFormSpec.values().associateWith {
+            if (it == custom?.first) custom.second else default
+        }
     }
 }

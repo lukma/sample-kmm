@@ -3,13 +3,18 @@ package com.gplay.app.feature.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gplay.core.domain.auth.usecase.SignInUseCase
+import com.gplay.core.domain.validation.FieldToValidate
+import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
+class LoginViewModel(
+    private val formValidationUseCase: FormValidationUseCase,
+    private val signInUseCase: SignInUseCase,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> get() = _uiState
@@ -29,12 +34,37 @@ class LoginViewModel(private val signInUseCase: SignInUseCase) : ViewModel() {
     private fun handleEvent(event: LoginUiEvent) {
         viewModelScope.launch {
             when (event) {
-                is LoginUiEvent.TypeUsername -> _uiState.update { it.copy(username = event.value) }
-                is LoginUiEvent.TypePassword -> _uiState.update { it.copy(password = event.value) }
+                is LoginUiEvent.TypeUsername -> onUsernameChanged(event.value)
+                is LoginUiEvent.TypePassword -> onPasswordChanged(event.value)
                 is LoginUiEvent.SignIn -> signIn()
                 is LoginUiEvent.ClearError -> _uiState.update { it.copy(error = null) }
             }
         }
+    }
+
+    private suspend fun onUsernameChanged(value: String) {
+        if (uiState.value.username != value) {
+            _uiState.update { it.copy(username = value) }
+        }
+        onValidate(toValidate = Pair(LoginFormSpec.Username, value))
+    }
+
+    private suspend fun onPasswordChanged(value: String) {
+        if (uiState.value.password != value) {
+            _uiState.update { it.copy(password = value) }
+        }
+        onValidate(toValidate = Pair(LoginFormSpec.Password, value))
+    }
+
+    private suspend fun onValidate(toValidate: FieldToValidate) {
+        val param = FormValidationUseCase.Param(
+            toValidate = toValidate,
+            current = uiState.value.validations,
+        )
+        formValidationUseCase(param)
+            .collect { result ->
+                _uiState.update { it.copy(validations = result) }
+            }
     }
 
     private suspend fun signIn() {

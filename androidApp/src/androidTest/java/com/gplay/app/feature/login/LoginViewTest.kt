@@ -7,6 +7,7 @@ import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.auth.usecase.SignInUseCase
+import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
@@ -15,6 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class LoginViewTest {
+    private val formValidationUseCase = FormValidationUseCase()
     private val signInUseCase: SignInUseCase = mockk()
     private val onSendMainUiEvent: (MainUiEvent) -> Unit = mockk(relaxed = true)
     private lateinit var viewModel: LoginViewModel
@@ -24,7 +26,7 @@ class LoginViewTest {
 
     @Before
     fun setup() {
-        viewModel = LoginViewModel(signInUseCase)
+        viewModel = LoginViewModel(formValidationUseCase, signInUseCase)
         composeTestRule.setContent {
             GPlayTheme {
                 GPlayScaffold {
@@ -35,16 +37,71 @@ class LoginViewTest {
     }
 
     @Test
+    fun perform_type_username_with_valid_value() {
+        // when
+        composeTestRule.onNode(hasTestTag("usernameTextField"))
+            .performTextInput(TestSamples.username)
+
+        // then
+        composeTestRule.onNode(hasTestTag("usernameTextField"))
+            .assertTextContains(TestSamples.username)
+        composeTestRule.onNode(hasTestTag("usernameTextFieldError"))
+            .assertIsNotDisplayed()
+    }
+
+    @Test
+    fun perform_type_username_with_empty_value() {
+        // when
+        composeTestRule.onNode(hasTestTag("usernameTextField"))
+            .performTextInput(TestSamples.username)
+        composeTestRule.onNode(hasTestTag("usernameTextField"))
+            .performTextClearance()
+
+        // then
+        composeTestRule.onNode(hasTestTag("usernameTextFieldError"))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun perform_type_password_with_valid_value() {
+        // when
+        composeTestRule.onNode(hasTestTag("passwordTextField"))
+            .performTextInput(TestSamples.password)
+
+        // then
+        composeTestRule.onNode(hasTestTag("passwordTextField"))
+            .assertTextContains("••••••")
+        composeTestRule.onNode(hasTestTag("passwordTextFieldError"))
+            .assertIsNotDisplayed()
+    }
+
+    @Test
+    fun perform_type_password_with_empty_value() {
+        // when
+        composeTestRule.onNode(hasTestTag("passwordTextField"))
+            .performTextInput(TestSamples.password)
+        composeTestRule.onNode(hasTestTag("passwordTextField"))
+            .performTextClearance()
+
+        // then
+        composeTestRule.onNode(hasTestTag("passwordTextFieldError"))
+            .assertIsDisplayed()
+    }
+
+    @Test
     fun perform_sign_in_got_success() {
         // given
         coEvery { signInUseCase(any()) } returns Result.success(Unit)
 
         // when
+        composeTestRule.onNode(hasTestTag("signInButton"))
+            .assertIsNotEnabled()
         composeTestRule.onNode(hasTestTag("usernameTextField"))
             .performTextInput(TestSamples.username)
         composeTestRule.onNode(hasTestTag("passwordTextField"))
             .performTextInput(TestSamples.password)
         composeTestRule.onNode(hasTestTag("signInButton"))
+            .assertIsEnabled()
             .performClick()
 
         // then
