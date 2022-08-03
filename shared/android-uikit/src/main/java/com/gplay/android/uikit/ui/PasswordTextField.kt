@@ -22,7 +22,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.gplay.android.uikit.R
-import com.gplay.android.uikit.util.validation.message
+import com.gplay.android.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
 
 @Composable
@@ -38,8 +38,7 @@ fun PasswordTextField(
         var passwordHidden by rememberSaveable { mutableStateOf(true) }
         val errorMessage by remember(value) {
             val text = (validation as? ValidationState.Invalid)
-                ?.error
-                ?.message(context, context.getString(R.string.textfield_password))
+                ?.errorMessage(context, context.getString(R.string.textfield_password))
                 ?: ""
             mutableStateOf(text)
         }

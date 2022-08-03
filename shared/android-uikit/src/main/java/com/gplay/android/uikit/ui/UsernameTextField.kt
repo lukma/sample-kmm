@@ -21,7 +21,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import com.gplay.android.uikit.R
-import com.gplay.android.uikit.util.validation.message
+import com.gplay.android.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
 
 @Composable
@@ -36,8 +36,7 @@ fun UsernameTextField(
     Column(modifier) {
         val errorMessage by remember(value) {
             val text = (validation as? ValidationState.Invalid)
-                ?.error
-                ?.message(context, context.getString(R.string.textfield_username))
+                ?.errorMessage(context, context.getString(R.string.textfield_username))
                 ?: ""
             mutableStateOf(text)
         }
