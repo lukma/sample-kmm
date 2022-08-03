@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -22,6 +21,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.gplay.android.uikit.R
+import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.android.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
 
@@ -78,7 +78,7 @@ fun PasswordTextField(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .padding(start = 16.dp, top = 4.dp)
-                .alpha(if (errorMessage.isNotEmpty()) 1f else 0f)
+                .visibilityBy { errorMessage.isNotEmpty() }
                 .semantics {
                     testTag = "passwordTextFieldError"
                 },

@@ -10,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -20,6 +19,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.gplay.android.uikit.ui.PasswordTextField
 import com.gplay.android.uikit.ui.UsernameTextField
+import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.app.R
 import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.LocalScaffoldController
@@ -64,7 +64,7 @@ fun LoginView(
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
                 }
-                .alpha(if (uiState.isLoading) 1f else 0f)
+                .visibilityBy { uiState.isLoading }
                 .semantics {
                     testTag = "loading"
                 },

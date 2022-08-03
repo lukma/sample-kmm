@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -21,6 +20,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import com.gplay.android.uikit.R
+import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.android.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
 
@@ -66,7 +66,7 @@ fun UsernameTextField(
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .padding(start = 16.dp, top = 4.dp)
-                .alpha(if (errorMessage.isNotEmpty()) 1f else 0f)
+                .visibilityBy { errorMessage.isNotEmpty() }
                 .semantics {
                     testTag = "usernameTextFieldError"
                 },
