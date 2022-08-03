@@ -105,6 +105,8 @@ class LoginViewTest {
             .performClick()
 
         // then
+        composeTestRule.onNode(hasTestTag("loading"))
+            .assertIsDisplayed()
         composeTestRule.mainClock.advanceTimeByFrame()
         verify(exactly = 1) { onSendMainUiEvent(MainUiEvent.CheckIsSignedIn) }
     }

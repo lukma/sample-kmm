@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.gplay.app.R
 import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.LocalScaffoldController
@@ -58,10 +59,25 @@ fun LoginView(
     ConstraintLayout(Modifier.fillMaxSize()) {
         val topGuideline = createGuidelineFromTop(0.3f)
         val (
+            loading,
             usernameTextField,
             passwordTextField,
             signInButton,
         ) = createRefs()
+
+        LinearProgressIndicator(
+            modifier = Modifier
+                .constrainAs(loading) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                }
+                .alpha(if (uiState.isLoading) 1f else 0f)
+                .semantics {
+                    testTag = "loading"
+                },
+        )
 
         Column(Modifier.constrainAs(usernameTextField) {
             start.linkTo(parent.start)
