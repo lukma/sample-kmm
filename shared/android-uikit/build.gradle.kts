@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    // Internal Module
+    implementation(project(":shared:common"))
+
     // Jetpack
     implementation(libs.compose.ui.core)
 
