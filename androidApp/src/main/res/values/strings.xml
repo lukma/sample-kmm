@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">GPlay</string>
 
+    <!-- Error -->
+    <string name="error_textfield_blank">%s tidak boleh kosong</string>
+
     <!-- TextField -->
     <string name="textfield_username">Username</string>
     <string name="textfield_password">Password</string>
