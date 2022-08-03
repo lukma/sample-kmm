@@ -5,4 +5,5 @@
 
     <!-- TextField -->
     <string name="textfield_username">Username</string>
+    <string name="textfield_password">Password</string>
 </resources>
