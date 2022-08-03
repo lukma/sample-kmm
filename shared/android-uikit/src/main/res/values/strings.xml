@@ -2,4 +2,7 @@
 <resources>
     <!-- Error -->
     <string name="error_textfield_blank">%s can\'t be blank</string>
+
+    <!-- TextField -->
+    <string name="textfield_username">Username</string>
 </resources>

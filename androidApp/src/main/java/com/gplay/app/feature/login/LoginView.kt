@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -26,11 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.gplay.android.uikit.ui.UsernameTextField
+import com.gplay.android.uikit.util.validation.message
 import com.gplay.app.R
 import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
-import com.gplay.app.util.validation.message
 import com.gplay.core.domain.validation.ValidationState
 import com.gplay.core.domain.validation.isAllValid
 import kotlinx.coroutines.launch
@@ -79,50 +79,16 @@ fun LoginView(
                 },
         )
 
-        Column(Modifier.constrainAs(usernameTextField) {
-            start.linkTo(parent.start)
-            top.linkTo(topGuideline)
-            end.linkTo(parent.end)
-        }) {
-            val error by remember(uiState.username) {
-                val text = (uiState.validations[LoginFormSpec.Username] as? ValidationState.Invalid)
-                    ?.error
-                    ?.message(context, context.getString(R.string.textfield_username))
-                    ?: ""
-                mutableStateOf(text)
-            }
-
-            OutlinedTextField(
-                value = uiState.username,
-                onValueChange = { viewModel.sendEvent(LoginUiEvent.TypeUsername(it)) },
-                modifier = Modifier
-                    .onFocusChanged {
-                        if (it.isCaptured && !it.isFocused && uiState.validations[LoginFormSpec.Username] == null) {
-                            viewModel.sendEvent(LoginUiEvent.TypeUsername(uiState.username))
-                        }
-                    }
-                    .semantics {
-                        testTag = "usernameTextField"
-                    },
-                label = { Text(stringResource(id = R.string.textfield_username)) },
-                leadingIcon = {
-                    Icon(imageVector = Icons.Filled.AlternateEmail, contentDescription = null)
-                },
-                isError = error.isNotEmpty(),
-            )
-
-            Text(
-                text = error,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 4.dp)
-                    .alpha(if (error.isNotEmpty()) 1f else 0f)
-                    .semantics {
-                        testTag = "usernameTextFieldError"
-                    },
-            )
-        }
+        UsernameTextField(
+            value = uiState.username,
+            onValueChange = { viewModel.sendEvent(LoginUiEvent.TypeUsername(it)) },
+            modifier = Modifier.constrainAs(usernameTextField) {
+                start.linkTo(parent.start)
+                top.linkTo(topGuideline)
+                end.linkTo(parent.end)
+            },
+            validation = uiState.validations[LoginFormSpec.Username],
+        )
 
         Column(Modifier.constrainAs(passwordTextField) {
             start.linkTo(parent.start)
