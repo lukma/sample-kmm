@@ -1,7 +1,7 @@
-package com.gplay.app.util.validation
+package com.gplay.android.uikit.util.validation
 
 import android.content.Context
-import com.gplay.app.R
+import com.gplay.android.uikit.R
 import com.gplay.core.domain.validation.ValidationError
 
 fun ValidationError.message(context: Context, vararg formatArgs: Any): String {
