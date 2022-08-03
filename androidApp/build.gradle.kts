@@ -86,6 +86,7 @@ dependencies {
     // Internal Module
     implementation(project(":shared:common"))
     implementation(project(":shared:android-navigation"))
+    implementation(project(":shared:android-uikit"))
 
     // Jetpack
     implementation(libs.androidx.core)
