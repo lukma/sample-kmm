@@ -32,6 +32,8 @@ This is **Kotlin Multiplatform** project for learning purpose.
 - [Koin](https://insert-koin.io) a pragmatic lightweight dependency injection framework for Kotlin.
 - [SQLDelight](https://cashapp.github.io/sqldelight) generates typesafe kotlin APIs from your SQL statements.
 - [Ktor](https://ktor.io) a multiplatform asynchronous HTTP client, which allows you to make requests and handle responses, extend its functionality with plugins, such as authentication, JSON serialization, and so on.
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) is Android’s modern toolkit for building native UI.
+- [Material Design 3](https://m3.material.io) is an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
 
 ## Project Structure
 
