@@ -1,0 +1,17 @@
+CREATE TABLE article (
+  id TEXT NOT NULL PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  thumbnail TEXT NOT NULL,
+  createdAt TEXT NOT NULL
+);
+
+upsert:
+INSERT OR REPLACE INTO article(id, title, content, thumbnail, createdAt)
+VALUES ?;
+
+finds:
+SELECT *
+FROM article
+ORDER BY createdAt
+LIMIT :limit OFFSET :offset;
