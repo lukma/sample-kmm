@@ -1,5 +1,6 @@
 package com.gplay.core.di
 
+import com.gplay.core.domain.article.usecase.GetArticlesUseCase
 import com.gplay.core.domain.auth.usecase.IsSignedInUseCase
 import com.gplay.core.domain.auth.usecase.SignInUseCase
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
@@ -12,6 +13,9 @@ internal val useCaseModule = module {
     // Auth
     factoryOf(::SignInUseCase)
     factoryOf(::IsSignedInUseCase)
+
+    // Article
+    factoryOf(::GetArticlesUseCase)
 
     // Validation
     factoryOf(::FormValidationUseCase)

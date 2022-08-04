@@ -1,5 +1,6 @@
 package com.gplay.core.di
 
+import com.gplay.core.domain.article.usecase.GetArticlesUseCase
 import com.gplay.core.domain.auth.usecase.IsSignedInUseCase
 import com.gplay.core.domain.auth.usecase.SignInUseCase
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
@@ -28,6 +29,18 @@ class UseCaseModuleTest : AutoInitKoinTest {
         // when
         val component1 = get<IsSignedInUseCase>()
         val component2 = get<IsSignedInUseCase>()
+
+        // then
+        assertNotNull(component1)
+        assertNotNull(component2)
+        assertNotEquals(component1, component2)
+    }
+
+    @Test
+    fun `should inject GetArticlesUseCase`() {
+        // when
+        val component1 = get<GetArticlesUseCase>()
+        val component2 = get<GetArticlesUseCase>()
 
         // then
         assertNotNull(component1)

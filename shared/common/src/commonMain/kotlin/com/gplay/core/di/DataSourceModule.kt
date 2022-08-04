@@ -1,5 +1,8 @@
 package com.gplay.core.di
 
+import com.gplay.core.data.article.ArticleDataSource
+import com.gplay.core.data.article.local.LocalArticleDataSource
+import com.gplay.core.data.article.network.NetworkArticleDataSource
 import com.gplay.core.data.auth.AuthDataSource
 import com.gplay.core.data.auth.local.LocalAuthDataSource
 import com.gplay.core.data.auth.network.NetworkAuthDataSource
@@ -15,5 +18,13 @@ internal val dataSourceModule = module {
     }
     factory<AuthDataSource>(named(DataSourceQualifier.Network)) {
         NetworkAuthDataSource(get(named(HttpClientQualifier.Simple)))
+    }
+
+    // Article
+    factory<ArticleDataSource>(named(DataSourceQualifier.Local)) {
+        LocalArticleDataSource(get())
+    }
+    factory<ArticleDataSource>(named(DataSourceQualifier.Network)) {
+        NetworkArticleDataSource(get(named(HttpClientQualifier.Simple)))
     }
 }
