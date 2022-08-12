@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
 class OffsetPagingSource<T : Any>(
-    private val onLoad: (LoadParams<Int>) -> List<T>,
+    private val onLoad: suspend (LoadParams<Int>) -> List<T>,
 ) : PagingSource<Int, T>() {
 
     override fun getRefreshKey(state: PagingState<Int, T>): Int? {
