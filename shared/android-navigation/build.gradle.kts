@@ -39,8 +39,8 @@ android {
 
 dependencies {
     // Jetpack
-    api(libs.compose.ui.core)
+    implementation(libs.compose.ui.core)
 
     // Compose Integration
-    api(libs.navigation.compose)
+    implementation(libs.navigation.compose)
 }
