@@ -42,13 +42,13 @@ android {
 
 dependencies {
     // Internal Module
-    api(project(":shared:common"))
+    implementation(project(":shared:common"))
 
     // Jetpack
-    api(libs.compose.ui.core)
+    implementation(libs.compose.ui.core)
     implementation(libs.paging.compose)
 
     // Material
-    api(libs.material3.compose)
-    api(libs.material.compose.icon)
+    implementation(libs.material3.compose)
+    implementation(libs.material.compose.icon)
 }
