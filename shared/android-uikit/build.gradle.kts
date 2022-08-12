@@ -46,6 +46,7 @@ dependencies {
 
     // Jetpack
     api(libs.compose.ui.core)
+    implementation(libs.paging.compose)
 
     // Material
     api(libs.material3.compose)
