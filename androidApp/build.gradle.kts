@@ -64,6 +64,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
         freeCompilerArgs = listOf(
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
         )
     }
@@ -88,6 +89,9 @@ dependencies {
     implementation(project(":shared:android-navigation"))
     implementation(project(":shared:android-uikit"))
 
+    // Kotlin
+    implementation(libs.kotlinx.datetime)
+
     // Jetpack
     implementation(libs.androidx.core)
     implementation(libs.androidx.startup)
@@ -101,6 +105,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
     implementation(libs.constraint.compose)
+    implementation(libs.paging.compose)
 
     // Koin
     implementation(libs.koin.android)
