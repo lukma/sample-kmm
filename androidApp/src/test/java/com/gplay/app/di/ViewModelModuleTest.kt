@@ -1,5 +1,6 @@
 package com.gplay.app.di
 
+import com.gplay.app.feature.home.HomeViewModel
 import com.gplay.app.feature.login.LoginViewModel
 import com.gplay.app.main.MainViewModel
 import com.gplay.app.util.AndroidKoinTest
@@ -27,6 +28,15 @@ class ViewModelModuleTest : AndroidKoinTest {
     fun `should inject LoginViewModel`() {
         // when
         val component = get<LoginViewModel>()
+
+        // then
+        assertNotNull(component)
+    }
+
+    @Test
+    fun `should inject HomeViewModel`() {
+        // when
+        val component = get<HomeViewModel>()
 
         // then
         assertNotNull(component)
