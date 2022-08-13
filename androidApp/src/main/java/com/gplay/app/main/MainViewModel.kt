@@ -10,10 +10,10 @@ class MainViewModel(
     private val isSignedInUseCase: IsSignedInUseCase,
 ) : ViewModel() {
 
+    private val uiEvent = MutableSharedFlow<MainUiEvent>()
+
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> get() = _uiState
-
-    private val uiEvent = MutableSharedFlow<MainUiEvent>()
 
     init {
         viewModelScope.launch {
@@ -25,11 +25,9 @@ class MainViewModel(
         viewModelScope.launch { uiEvent.emit(event) }
     }
 
-    private fun handleEvent(event: MainUiEvent) {
-        viewModelScope.launch {
-            when (event) {
-                is MainUiEvent.CheckIsSignedIn -> checkIsSignedIn()
-            }
+    private suspend fun handleEvent(event: MainUiEvent) {
+        when (event) {
+            is MainUiEvent.CheckIsSignedIn -> checkIsSignedIn()
         }
     }
 
