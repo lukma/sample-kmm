@@ -16,10 +16,10 @@ class LoginViewModel(
     private val signInUseCase: SignInUseCase,
 ) : ViewModel() {
 
+    private val uiEvent = MutableSharedFlow<LoginUiEvent>()
+
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> get() = _uiState
-
-    private val uiEvent = MutableSharedFlow<LoginUiEvent>()
 
     init {
         viewModelScope.launch {
@@ -31,14 +31,12 @@ class LoginViewModel(
         viewModelScope.launch { uiEvent.emit(event) }
     }
 
-    private fun handleEvent(event: LoginUiEvent) {
-        viewModelScope.launch {
-            when (event) {
-                is LoginUiEvent.TypeUsername -> onUsernameChanged(event.value)
-                is LoginUiEvent.TypePassword -> onPasswordChanged(event.value)
-                is LoginUiEvent.SignIn -> signIn()
-                is LoginUiEvent.ClearError -> _uiState.update { it.copy(error = null) }
-            }
+    private suspend fun handleEvent(event: LoginUiEvent) {
+        when (event) {
+            is LoginUiEvent.TypeUsername -> onUsernameChanged(event.value)
+            is LoginUiEvent.TypePassword -> onPasswordChanged(event.value)
+            is LoginUiEvent.SignIn -> signIn()
+            is LoginUiEvent.ClearError -> _uiState.update { it.copy(error = null) }
         }
     }
 
