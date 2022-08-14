@@ -106,6 +106,7 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.constraint.compose)
     implementation(libs.paging.compose)
+    implementation(libs.coil.compose)
 
     // Koin
     implementation(libs.koin.android)
