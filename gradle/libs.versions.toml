@@ -59,6 +59,7 @@ constraint-compose = { module = "androidx.constraintlayout:constraintlayout-comp
 paging-compose = { module = "androidx.paging:paging-compose", version = "1.0.0-alpha15" }
 coil-compose = { module = "io.coil-kt:coil-compose", version = "2.1.0" }
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder", version.ref = "accompanist" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version = "5.2.0" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.4.0" }
 
 [bundles]
