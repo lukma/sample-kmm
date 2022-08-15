@@ -46,6 +46,7 @@ dependencies {
 
     // Jetpack
     implementation(libs.compose.ui.core)
+    implementation(libs.constraint.compose)
     implementation(libs.paging.compose)
     implementation(libs.lottie.compose)
 
