@@ -16,15 +16,13 @@ class LoginViewModel(
     private val signInUseCase: SignInUseCase,
 ) : ViewModel() {
 
-    private val uiEvent = MutableSharedFlow<LoginUiEvent>()
-
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> get() = _uiState
 
+    private val uiEvent = MutableSharedFlow<LoginUiEvent>()
+
     init {
-        viewModelScope.launch {
-            uiEvent.collect(::handleEvent)
-        }
+        viewModelScope.launch { uiEvent.collect(::handleEvent) }
     }
 
     fun sendEvent(event: LoginUiEvent) {
