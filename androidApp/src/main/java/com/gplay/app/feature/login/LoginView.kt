@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
@@ -35,12 +36,16 @@ fun LoginView(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val scaffoldController = LocalScaffoldController.current
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     when {
         uiState.isSignedIn -> onSendMainUiEvent(MainUiEvent.CheckIsSignedIn)
         uiState.error != null -> scope.launch {
-            when (scaffoldController.showSnackbar(uiState.error?.message)) {
+            val result = scaffoldController.showSnackbar(
+                message = uiState.error?.message ?: context.getString(R.string.error_need_retry),
+            )
+            when (result) {
                 SnackbarResult.Dismissed -> viewModel.sendEvent(LoginUiEvent.ClearError)
                 else -> { /* no-op */ }
             }
