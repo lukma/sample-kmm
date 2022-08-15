@@ -4,25 +4,32 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
 class OffsetPagingSource<T : Any>(
-    private val onLoad: suspend (LoadParams<Int>) -> List<T>,
+    private val onLoad: suspend (key: Int, pageSize: Int) -> List<T>,
 ) : PagingSource<Int, T>() {
 
     override fun getRefreshKey(state: PagingState<Int, T>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
         return runCatching {
-            val position = params.key ?: 0
-            val data = onLoad(params)
-            val prevKey = if (position == 0) null else position - 1
-            val nextKey = if (data.isEmpty()) null else position + 1
-            LoadResult.Page(data, prevKey, nextKey)
+            val requestPage = params.key ?: initialPage
+            val data = onLoad(requestPage, params.loadSize)
+            val nextPage = if (data.isEmpty()) null else requestPage + 1
+            LoadResult.Page(
+                data = data,
+                prevKey = null,
+                nextKey = nextPage,
+            )
         }.getOrElse {
             LoadResult.Error(it)
         }
+    }
+
+    companion object {
+        private const val initialPage = 1
     }
 }
