@@ -53,7 +53,7 @@ fun PasswordTextField(
                     }
                 }
                 .semantics {
-                    testTag = "passwordTextField"
+                    testTag = "PasswordTextField"
                 },
             label = { Text(stringResource(id = R.string.textfield_password)) },
             leadingIcon = {
@@ -80,7 +80,7 @@ fun PasswordTextField(
                 .padding(start = 16.dp, top = 4.dp)
                 .visibilityBy { errorMessage.isNotEmpty() }
                 .semantics {
-                    testTag = "passwordTextFieldError"
+                    testTag = "PasswordTextFieldError"
                 },
         )
     }

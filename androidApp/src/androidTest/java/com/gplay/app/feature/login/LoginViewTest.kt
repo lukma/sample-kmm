@@ -39,52 +39,52 @@ class LoginViewTest {
     @Test
     fun perform_type_username_with_valid_value() {
         // when
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .performTextInput(TestSamples.username)
 
         // then
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .assertTextContains(TestSamples.username)
-        composeTestRule.onNode(hasTestTag("usernameTextFieldError"))
+        composeTestRule.onNode(hasTestTag("UsernameTextFieldError"))
             .assertIsNotDisplayed()
     }
 
     @Test
     fun perform_type_username_with_empty_value() {
         // when
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .performTextInput(TestSamples.username)
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .performTextClearance()
 
         // then
-        composeTestRule.onNode(hasTestTag("usernameTextFieldError"))
+        composeTestRule.onNode(hasTestTag("UsernameTextFieldError"))
             .assertIsDisplayed()
     }
 
     @Test
     fun perform_type_password_with_valid_value() {
         // when
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .performTextInput(TestSamples.password)
 
         // then
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .assertTextContains("••••••")
-        composeTestRule.onNode(hasTestTag("passwordTextFieldError"))
+        composeTestRule.onNode(hasTestTag("PasswordTextFieldError"))
             .assertIsNotDisplayed()
     }
 
     @Test
     fun perform_type_password_with_empty_value() {
         // when
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .performTextInput(TestSamples.password)
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .performTextClearance()
 
         // then
-        composeTestRule.onNode(hasTestTag("passwordTextFieldError"))
+        composeTestRule.onNode(hasTestTag("PasswordTextFieldError"))
             .assertIsDisplayed()
     }
 
@@ -94,18 +94,18 @@ class LoginViewTest {
         coEvery { signInUseCase(any()) } returns Result.success(Unit)
 
         // when
-        composeTestRule.onNode(hasTestTag("signInButton"))
+        composeTestRule.onNode(hasTestTag("SignInButton"))
             .assertIsNotEnabled()
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .performTextInput(TestSamples.username)
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .performTextInput(TestSamples.password)
-        composeTestRule.onNode(hasTestTag("signInButton"))
+        composeTestRule.onNode(hasTestTag("SignInButton"))
             .assertIsEnabled()
             .performClick()
 
         // then
-        composeTestRule.onNode(hasTestTag("loading"))
+        composeTestRule.onNode(hasTestTag("Loading"))
             .assertIsDisplayed()
         composeTestRule.mainClock.advanceTimeByFrame()
         verify(exactly = 1) { onSendMainUiEvent(MainUiEvent.CheckIsSignedIn) }
@@ -117,11 +117,11 @@ class LoginViewTest {
         coEvery { signInUseCase(any()) } returns Result.failure(TestSamples.error)
 
         // when
-        composeTestRule.onNode(hasTestTag("usernameTextField"))
+        composeTestRule.onNode(hasTestTag("UsernameTextField"))
             .performTextInput(TestSamples.username)
-        composeTestRule.onNode(hasTestTag("passwordTextField"))
+        composeTestRule.onNode(hasTestTag("PasswordTextField"))
             .performTextInput(TestSamples.password)
-        composeTestRule.onNode(hasTestTag("signInButton"))
+        composeTestRule.onNode(hasTestTag("SignInButton"))
             .performClick()
 
         // then

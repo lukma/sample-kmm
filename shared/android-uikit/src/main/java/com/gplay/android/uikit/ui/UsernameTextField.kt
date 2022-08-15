@@ -51,7 +51,7 @@ fun UsernameTextField(
                     }
                 }
                 .semantics {
-                    testTag = "usernameTextField"
+                    testTag = "UsernameTextField"
                 },
             label = { Text(stringResource(id = R.string.textfield_username)) },
             leadingIcon = {
@@ -68,7 +68,7 @@ fun UsernameTextField(
                 .padding(start = 16.dp, top = 4.dp)
                 .visibilityBy { errorMessage.isNotEmpty() }
                 .semantics {
-                    testTag = "usernameTextFieldError"
+                    testTag = "UsernameTextFieldError"
                 },
         )
     }

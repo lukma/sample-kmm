@@ -66,7 +66,7 @@ fun LoginView(
                 }
                 .visibilityBy { uiState.isLoading }
                 .semantics {
-                    testTag = "loading"
+                    testTag = "Loading"
                 },
         )
 
@@ -100,7 +100,7 @@ fun LoginView(
                     end.linkTo(passwordTextField.end)
                 }
                 .semantics {
-                    testTag = "signInButton"
+                    testTag = "SignInButton"
                 },
             enabled = uiState.validations.isAllValid(),
         ) {
