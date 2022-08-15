@@ -3,6 +3,7 @@ package com.gplay.app.feature.home
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.core.text.HtmlCompat
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.app.util.TestSamples
@@ -25,7 +26,10 @@ class HomeViewTest {
         composeTestRule.setContent {
             GPlayTheme {
                 GPlayScaffold {
-                    HomeView(viewModel)
+                    val pagingItems = viewModel.paging.collectAsLazyPagingItems()
+                    HomeView(
+                        pagingItems = pagingItems,
+                    )
                 }
             }
         }

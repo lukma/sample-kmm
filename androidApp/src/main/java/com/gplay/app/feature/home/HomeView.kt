@@ -10,21 +10,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.gplay.android.uikit.ui.ErrorView
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
+import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.article.Article
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Clock
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeView(
-    viewModel: HomeViewModel = getViewModel(),
+    pagingItems: LazyPagingItems<HomeListItemModel>,
 ) {
-    val pagingItems = viewModel.paging.collectAsLazyPagingItems()
-
     LazyColumn(
         contentPadding = PaddingValues(start = 8.dp, top = 16.dp, end = 8.dp, bottom = 8.dp),
     ) {
@@ -61,7 +62,14 @@ private val dummyArticle = Article("", "", "", "", Clock.System.now())
 private fun DefaultPreview() {
     GPlayTheme {
         GPlayScaffold {
-            HomeView()
+            val data = TestSamples.articlePagingResult()
+                .items
+                .map(HomeListItemModel::ArticleItem)
+            val pagingFlow = flowOf(PagingData.from<HomeListItemModel>(data))
+            val pagingItems = pagingFlow.collectAsLazyPagingItems()
+            HomeView(
+                pagingItems = pagingItems,
+            )
         }
     }
 }
