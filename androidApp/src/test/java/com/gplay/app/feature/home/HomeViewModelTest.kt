@@ -39,14 +39,13 @@ class HomeViewModelTest {
     @Test
     fun `perform get articles got failure`() = runTest {
         // given
-        val error = Error()
-        coEvery { getArticlesUseCase(any()) } returns flow { throw error }
+        coEvery { getArticlesUseCase(any()) } returns flow { throw TestSamples.error }
         viewModel = HomeViewModel(getArticlesUseCase)
 
         // when
         val actual = viewModel.paging.asPagingDataError(this)
 
         // then
-        assertEquals(error, actual)
+        assertEquals(TestSamples.error, actual)
     }
 }

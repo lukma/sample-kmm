@@ -54,15 +54,14 @@ class HomeViewTest {
     @Test
     fun perform_get_articles_got_failure() {
         // given
-        val error = Error("some error")
-        coEvery { getArticlesUseCase(any()) } returns flow { throw error }
+        coEvery { getArticlesUseCase(any()) } returns flow { throw TestSamples.error }
 
         // when
         launchView()
 
         // then
         val parentMatcher = hasParent(hasTestTag("ErrorView"))
-        composeTestRule.onNode(parentMatcher and hasText(error.message.orEmpty()))
+        composeTestRule.onNode(parentMatcher and hasText(TestSamples.error.message.orEmpty()))
             .assertIsDisplayed()
     }
 }
