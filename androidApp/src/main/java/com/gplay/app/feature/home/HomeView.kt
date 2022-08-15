@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.gplay.android.uikit.ui.ErrorView
+import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.core.domain.article.Article
 import kotlinx.datetime.Clock
@@ -59,6 +60,8 @@ private val dummyArticle = Article("", "", "", "", Clock.System.now())
 @Composable
 private fun DefaultPreview() {
     GPlayTheme {
-        HomeView()
+        GPlayScaffold {
+            HomeView()
+        }
     }
 }

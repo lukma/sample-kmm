@@ -23,6 +23,7 @@ import com.gplay.android.uikit.ui.UsernameTextField
 import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.app.R
 import com.gplay.app.main.MainUiEvent
+import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.core.domain.validation.isAllValid
@@ -118,8 +119,10 @@ fun LoginView(
 @Composable
 private fun DefaultPreview() {
     GPlayTheme {
-        LoginView(
-            onSendMainUiEvent = { /* no-op */ },
-        )
+        GPlayScaffold {
+            LoginView(
+                onSendMainUiEvent = { /* no-op */ },
+            )
+        }
     }
 }
