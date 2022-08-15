@@ -112,6 +112,9 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
 
+    // Accompanist
+    implementation(libs.accompanist.placeholder)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
