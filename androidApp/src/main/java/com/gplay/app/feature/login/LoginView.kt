@@ -6,8 +6,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,32 +20,30 @@ import com.gplay.android.uikit.ui.PasswordTextField
 import com.gplay.android.uikit.ui.UsernameTextField
 import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.app.R
-import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.core.domain.validation.isAllValid
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun LoginView(
-    viewModel: LoginViewModel = getViewModel(),
-    onSendMainUiEvent: (MainUiEvent) -> Unit,
+    uiState: LoginUiState,
+    onSendEvent: (LoginUiEvent) -> Unit,
+    onSigned: () -> Unit,
 ) {
-    val uiState by viewModel.uiState.collectAsState()
     val scaffoldController = LocalScaffoldController.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     when {
-        uiState.isSignedIn -> onSendMainUiEvent(MainUiEvent.CheckIsSignedIn)
+        uiState.isSignedIn -> onSigned()
         uiState.error != null -> scope.launch {
             val result = scaffoldController.showSnackbar(
-                message = uiState.error?.message ?: context.getString(R.string.error_need_retry),
+                message = uiState.error.message ?: context.getString(R.string.error_need_retry),
             )
             when (result) {
-                SnackbarResult.Dismissed -> viewModel.sendEvent(LoginUiEvent.ClearError)
+                SnackbarResult.Dismissed -> onSendEvent(LoginUiEvent.ClearError)
                 else -> { /* no-op */ }
             }
         }
@@ -78,7 +74,7 @@ fun LoginView(
 
         UsernameTextField(
             value = uiState.username,
-            onValueChange = { viewModel.sendEvent(LoginUiEvent.TypeUsername(it)) },
+            onValueChange = { onSendEvent(LoginUiEvent.TypeUsername(it)) },
             modifier = Modifier.constrainAs(usernameTextField) {
                 start.linkTo(parent.start)
                 top.linkTo(topGuideline)
@@ -89,7 +85,7 @@ fun LoginView(
 
         PasswordTextField(
             value = uiState.password,
-            onValueChange = { viewModel.sendEvent(LoginUiEvent.TypePassword(it)) },
+            onValueChange = { onSendEvent(LoginUiEvent.TypePassword(it)) },
             modifier = Modifier.constrainAs(passwordTextField) {
                 start.linkTo(parent.start)
                 top.linkTo(usernameTextField.bottom)
@@ -99,7 +95,7 @@ fun LoginView(
         )
 
         Button(
-            onClick = { viewModel.sendEvent(LoginUiEvent.SignIn) },
+            onClick = { onSendEvent(LoginUiEvent.SignIn) },
             modifier = Modifier
                 .constrainAs(signInButton) {
                     top.linkTo(passwordTextField.bottom, margin = 8.dp)
@@ -121,7 +117,9 @@ private fun DefaultPreview() {
     GPlayTheme {
         GPlayScaffold {
             LoginView(
-                onSendMainUiEvent = { /* no-op */ },
+                uiState = LoginUiState(),
+                onSendEvent = { /* no-op */ },
+                onSigned = { /* no-op */ },
             )
         }
     }

@@ -1,8 +1,9 @@
 package com.gplay.app.feature.login
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.gplay.app.main.MainUiEvent
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.app.util.TestSamples
@@ -18,7 +19,7 @@ import org.junit.Test
 class LoginViewTest {
     private val formValidationUseCase = FormValidationUseCase()
     private val signInUseCase: SignInUseCase = mockk()
-    private val onSendMainUiEvent: (MainUiEvent) -> Unit = mockk(relaxed = true)
+    private val onSigned: () -> Unit = mockk(relaxed = true)
     private lateinit var viewModel: LoginViewModel
 
     @get:Rule
@@ -30,7 +31,12 @@ class LoginViewTest {
         composeTestRule.setContent {
             GPlayTheme {
                 GPlayScaffold {
-                    LoginView(viewModel, onSendMainUiEvent)
+                    val uiState by viewModel.uiState.collectAsState()
+                    LoginView(
+                        uiState = uiState,
+                        onSendEvent = viewModel::sendEvent,
+                        onSigned = onSigned,
+                    )
                 }
             }
         }
@@ -108,7 +114,7 @@ class LoginViewTest {
         composeTestRule.onNode(hasTestTag("Loading"))
             .assertIsDisplayed()
         composeTestRule.mainClock.advanceTimeByFrame()
-        verify(exactly = 1) { onSendMainUiEvent(MainUiEvent.CheckIsSignedIn) }
+        verify(exactly = 1) { onSigned() }
     }
 
     @Test
