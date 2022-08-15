@@ -17,21 +17,23 @@ class HomeViewModel(
     private val getArticlesUseCase: GetArticlesUseCase,
 ) : ViewModel() {
 
-    val articles: Flow<PagingData<HomeListItemModel>> = Pager(
+    val paging: Flow<PagingData<HomeListItemModel>> = Pager(
         PagingConfig(
             pageSize = PagingParams.defaultPagingSize,
             initialLoadSize = PagingParams.defaultPagingSize,
         ),
     ) {
-        OffsetPagingSource<HomeListItemModel> {
-            val param = GetArticlesUseCase.Param(
-                paging = it.toPagingParams(),
-            )
-            getArticlesUseCase(param).single()
-                .items
-                .map(HomeListItemModel::ArticleItem)
+        OffsetPagingSource {
+            getArticles(paging = it.toPagingParams())
         }
     }
         .flow
         .cachedIn(viewModelScope)
+
+    private suspend fun getArticles(paging: PagingParams<Int>): List<HomeListItemModel> {
+        val param = GetArticlesUseCase.Param(paging)
+        return getArticlesUseCase(param).single()
+            .items
+            .map(HomeListItemModel::ArticleItem)
+    }
 }

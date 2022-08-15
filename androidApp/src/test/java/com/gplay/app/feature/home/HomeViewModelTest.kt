@@ -27,7 +27,7 @@ class HomeViewModelTest {
         viewModel = HomeViewModel(getArticlesUseCase)
 
         // when
-        val actual = viewModel.articles.asPagingDataItems(this)
+        val actual = viewModel.paging.asPagingDataItems(this)
 
         // then
         val expected = TestSamples.articlePagingResult()
@@ -44,7 +44,7 @@ class HomeViewModelTest {
         viewModel = HomeViewModel(getArticlesUseCase)
 
         // when
-        val actual = viewModel.articles.asPagingDataError(this)
+        val actual = viewModel.paging.asPagingDataError(this)
 
         // then
         assertEquals(error, actual)
