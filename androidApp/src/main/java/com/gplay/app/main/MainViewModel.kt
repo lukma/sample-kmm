@@ -10,15 +10,13 @@ class MainViewModel(
     private val isSignedInUseCase: IsSignedInUseCase,
 ) : ViewModel() {
 
-    private val uiEvent = MutableSharedFlow<MainUiEvent>()
-
     private val _uiState = MutableStateFlow(MainUiState())
     val uiState: StateFlow<MainUiState> get() = _uiState
 
+    private val uiEvent = MutableSharedFlow<MainUiEvent>()
+
     init {
-        viewModelScope.launch {
-            uiEvent.collect(::handleEvent)
-        }
+        viewModelScope.launch { uiEvent.collect(::handleEvent) }
     }
 
     fun sendEvent(event: MainUiEvent) {
