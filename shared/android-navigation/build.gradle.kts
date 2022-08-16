@@ -4,6 +4,5 @@ plugins {
 }
 
 dependencies {
-    // Compose Integration
     implementation(libs.navigation.compose)
 }

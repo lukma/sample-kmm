@@ -57,7 +57,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 // Kotlin
                 implementation(libs.findLibrary("kotlinx.datetime").get())
 
-                // Jetpack
+                // Androidx
                 implementation(libs.findLibrary("androidx.core").get())
 
                 // Testing

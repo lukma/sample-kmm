@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":shared:android-navigation"))
     implementation(project(":shared:android-uikit"))
 
-    // Jetpack
+    // Androidx
     implementation(libs.androidx.startup)
 
     // Material
