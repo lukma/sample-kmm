@@ -1,4 +1,4 @@
-package com.gplay.buildlogic
+package com.gplay.buildlogic.ext
 
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 

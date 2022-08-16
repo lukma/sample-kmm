@@ -1,9 +1,9 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import com.gplay.buildlogic.androidTestImplementation
-import com.gplay.buildlogic.configureKotlinAndroid
 import com.gplay.buildlogic.constant.AndroidConfig
-import com.gplay.buildlogic.implementation
-import com.gplay.buildlogic.testImplementation
+import com.gplay.buildlogic.ext.androidTestImplementation
+import com.gplay.buildlogic.ext.configureKotlinAndroid
+import com.gplay.buildlogic.ext.implementation
+import com.gplay.buildlogic.ext.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension

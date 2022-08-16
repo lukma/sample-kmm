@@ -1,4 +1,4 @@
-package com.gplay.buildlogic
+package com.gplay.buildlogic.ext
 
 import com.android.build.api.dsl.CommonExtension
 import com.gplay.buildlogic.constant.AndroidConfig
