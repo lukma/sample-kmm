@@ -21,7 +21,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<BaseAppModuleExtension> {
                 configureKotlinAndroid(this)
                 with(defaultConfig) {
-                    targetSdk = 33
+                    targetSdk = 32
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                     vectorDrawables.useSupportLibrary = true
                 }

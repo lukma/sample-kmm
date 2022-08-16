@@ -20,5 +20,9 @@ gradlePlugin {
             id = "gplay.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "gplay.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
