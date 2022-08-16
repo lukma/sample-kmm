@@ -2,15 +2,12 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
+    id("gplay.multiplatform.library")
     kotlin("plugin.serialization")
-    id("com.android.library")
     id(libs.plugins.sqldelight.get().pluginId)
 }
 
 kotlin {
-    android()
-    
     val xcf = XCFramework()
     listOf(
         iosX64(),
@@ -84,15 +81,6 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
-    }
-}
-
-android {
-    compileSdk = 33
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 23
-        targetSdk = 33
     }
 }
 
