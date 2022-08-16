@@ -81,14 +81,6 @@ ktor-common = [
     "ktor.auth",
     "ktor.logging"
 ]
-compose-common = [
-    "compose.ui.core",
-    "compose.ui.tooling.preview",
-]
-test-compose-debug = [
-    "compose.ui.tooling",
-    "compose.ui.test.manifest"
-]
 
 [plugins]
 sqldelight = { id = "app.cash.sqldelight" }

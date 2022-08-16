@@ -13,3 +13,7 @@ internal fun DependencyHandlerScope.testImplementation(dependencyNotation: Any) 
 internal fun DependencyHandlerScope.androidTestImplementation(dependencyNotation: Any) {
     add("androidTestImplementation", dependencyNotation)
 }
+
+internal fun DependencyHandlerScope.debugImplementation(dependencyNotation: Any) {
+    add("debugImplementation", dependencyNotation)
+}

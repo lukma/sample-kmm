@@ -3,6 +3,7 @@ import java.io.FileInputStream
 
 plugins {
     id("gplay.android.application")
+    id("gplay.android.application.compose")
 }
 
 android {
@@ -28,13 +29,6 @@ android {
             )
         }
     }
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
 }
 
 dependencies {
@@ -45,7 +39,6 @@ dependencies {
 
     // Jetpack
     implementation(libs.androidx.startup)
-    implementation(libs.bundles.compose.common)
 
     // Material
     implementation(libs.material3.compose)
@@ -68,7 +61,5 @@ dependencies {
     // Testing
     testImplementation(libs.mockk.core)
     testImplementation(libs.koin.test)
-    androidTestImplementation(libs.compose.ui.test.junit)
     androidTestImplementation(libs.mockk.android)
-    debugImplementation(libs.bundles.test.compose.debug)
 }

@@ -1,22 +1,13 @@
 plugins {
     id("gplay.android.library")
-}
-
-android {
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+    id("gplay.android.library.compose")
 }
 
 dependencies {
     // Internal Module
     implementation(project(":shared:common"))
 
-    // Jetpack
-    implementation(libs.compose.ui.core)
+    // Compose Integration
     implementation(libs.constraint.compose)
     implementation(libs.paging.compose)
     implementation(libs.lottie.compose)
