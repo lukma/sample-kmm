@@ -1,6 +1,7 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.gplay.buildlogic.androidTestImplementation
 import com.gplay.buildlogic.configureKotlinAndroid
+import com.gplay.buildlogic.constant.AndroidConfig
 import com.gplay.buildlogic.implementation
 import com.gplay.buildlogic.testImplementation
 import org.gradle.api.Plugin
@@ -21,7 +22,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<BaseAppModuleExtension> {
                 configureKotlinAndroid(this)
                 with(defaultConfig) {
-                    targetSdk = 32
+                    targetSdk = AndroidConfig.targetSdk
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                     vectorDrawables.useSupportLibrary = true
                 }

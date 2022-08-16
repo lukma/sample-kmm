@@ -1,6 +1,7 @@
 package com.gplay.buildlogic
 
 import com.android.build.api.dsl.CommonExtension
+import com.gplay.buildlogic.constant.AndroidConfig
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -10,10 +11,10 @@ internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = 33
+        compileSdk = AndroidConfig.compileSdk
 
         defaultConfig {
-            minSdk = 23
+            minSdk = AndroidConfig.minSdk
         }
 
         compileOptions {
