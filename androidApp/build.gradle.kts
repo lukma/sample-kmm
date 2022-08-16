@@ -2,42 +2,14 @@ import org.jetbrains.kotlin.konan.properties.Properties
 import java.io.FileInputStream
 
 plugins {
-    kotlin("android")
-    id("com.android.application")
+    id("gplay.android.application")
 }
 
 android {
-    compileSdk = 33
-
     defaultConfig {
         applicationId = "com.gplay.app"
-        minSdk = 23
-        targetSdk = 33
         versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    testOptions {
-        packagingOptions {
-            jniLibs {
-                useLegacyPackaging = true
-            }
-        }
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+        versionName = "1.0.0-alpha01"
     }
 
     flavorDimensions += "environment"
@@ -57,29 +29,11 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-        freeCompilerArgs = listOf(
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-        )
-    }
-
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
@@ -89,11 +43,7 @@ dependencies {
     implementation(project(":shared:android-navigation"))
     implementation(project(":shared:android-uikit"))
 
-    // Kotlin
-    implementation(libs.kotlinx.datetime)
-
     // Jetpack
-    implementation(libs.androidx.core)
     implementation(libs.androidx.startup)
     implementation(libs.bundles.compose.common)
 
@@ -116,13 +66,8 @@ dependencies {
     implementation(libs.accompanist.placeholder)
 
     // Testing
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlin.test)
-    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk.core)
     testImplementation(libs.koin.test)
-    androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.compose.ui.test.junit)
     androidTestImplementation(libs.mockk.android)
     debugImplementation(libs.bundles.test.compose.debug)
