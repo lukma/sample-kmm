@@ -68,8 +68,8 @@ kotlin {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
-            macosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            macosArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.sqldelight.native)
                 implementation(libs.ktor.darwin)
