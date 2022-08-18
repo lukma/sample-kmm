@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A714A15228ADEFDA009040A3 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */; };
 		A714A15328ADEFDA009040A3 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */; };
+		A714A15828ADF08D009040A3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15728ADF08D009040A3 /* APIConfiguration.swift */; };
+		A714A15928ADF08D009040A3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15728ADF08D009040A3 /* APIConfiguration.swift */; };
 		A73BCB6728AD0860003AB2DC /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB6628AD0860003AB2DC /* Tests_iOS.swift */; };
 		A73BCB6928AD0860003AB2DC /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB6828AD0860003AB2DC /* Tests_iOSLaunchTests.swift */; };
 		A73BCB7328AD0860003AB2DC /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB7228AD0860003AB2DC /* Tests_macOS.swift */; };
@@ -42,6 +44,7 @@
 		A714A14728ADEADD009040A3 /* GPlay--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GPlay--iOS--Info.plist"; sourceTree = "<group>"; };
 		A714A14828ADEAFD009040A3 /* GPlay--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GPlay--macOS--Info.plist"; sourceTree = "<group>"; };
 		A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
+		A714A15728ADF08D009040A3 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		A73BCB4E28AD0860003AB2DC /* GPlayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPlayApp.swift; sourceTree = "<group>"; };
 		A73BCB4F28AD0860003AB2DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A73BCB5028AD0860003AB2DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */,
+				A714A15728ADF08D009040A3 /* APIConfiguration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -318,6 +322,7 @@
 				A714A15228ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7828AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7628AD0860003AB2DC /* GPlayApp.swift in Sources */,
+				A714A15828ADF08D009040A3 /* APIConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +333,7 @@
 				A714A15328ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7928AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7728AD0860003AB2DC /* GPlayApp.swift in Sources */,
+				A714A15928ADF08D009040A3 /* APIConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
