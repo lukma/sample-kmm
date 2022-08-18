@@ -6,6 +6,8 @@
 //
 
 class APIConfiguration {
+    static let shared = APIConfiguration()
+
     var apiHost: String {
         switch BuildConfiguration.shared.environment {
         case .debugMock, .releaseMock:
