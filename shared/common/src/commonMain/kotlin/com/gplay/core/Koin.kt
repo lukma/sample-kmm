@@ -1,6 +1,8 @@
 package com.gplay.core
 
 import com.gplay.core.config.AppConfig
+import com.gplay.core.di.databaseModule
+import com.gplay.core.di.networkModule
 import com.gplay.core.di.platformModule
 import com.gplay.core.di.useCaseModule
 import org.koin.core.context.startKoin
@@ -16,11 +18,9 @@ fun initKoin(
         listOf(
             module { single { appConfig } },
             platformModule,
+            databaseModule,
+            networkModule,
             useCaseModule,
         )
     )
-}
-
-fun initKoin(appConfig: AppConfig) {
-    initKoin(appConfig) {}
 }

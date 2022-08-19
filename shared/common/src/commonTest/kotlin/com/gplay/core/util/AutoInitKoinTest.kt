@@ -14,7 +14,7 @@ interface AutoInitKoinTest : KoinTest {
 
     @BeforeTest
     fun setup() {
-        initKoin(appConfig = mockk(relaxed = true))
+        initKoin(appConfig = mockk(relaxed = true)) {}
         val testPlatformModule = module {
             single { createTestSqlDriver() }
             single { MockEngine { respondOk() } }

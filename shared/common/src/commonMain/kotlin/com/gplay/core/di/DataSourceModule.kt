@@ -10,8 +10,6 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 internal val dataSourceModule = module {
-    includes(databaseModule, networkModule)
-
     // Auth
     factory<AuthDataSource>(named(DataSourceQualifier.Local)) {
         LocalAuthDataSource(get())
