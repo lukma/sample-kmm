@@ -4,21 +4,26 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 
 @Composable
 fun GPlayScaffold(
-    content: @Composable (PaddingValues) -> Unit,
+    content: @Composable (PaddingValues) -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val scaffoldController = remember { SimpleScaffoldController(snackbarHostState) }
+    val scaffoldController = remember { ScaffoldControllerImpl(snackbarHostState) }
 
     CompositionLocalProvider(LocalScaffoldController provides scaffoldController) {
         Scaffold(
             snackbarHost = { SnackbarHost(snackbarHostState) },
-            content = content,
+            content = content
         )
     }
+}
+
+val LocalScaffoldController = compositionLocalOf<ScaffoldController> {
+    error("CompositionLocal ScaffoldController not present")
 }
 
 interface ScaffoldController {
@@ -30,7 +35,7 @@ interface ScaffoldController {
     ): SnackbarResult
 }
 
-private class SimpleScaffoldController(
+private class ScaffoldControllerImpl(
     private val snackbarHostState: SnackbarHostState,
 ) : ScaffoldController {
 
