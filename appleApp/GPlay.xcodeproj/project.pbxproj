@@ -21,6 +21,8 @@
 		A73BCB7928AD0860003AB2DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB4F28AD0860003AB2DC /* ContentView.swift */; };
 		A73BCB7A28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
 		A73BCB7B28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
+		A7810DD428AF9D6100FE330E /* GPlayAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7810DD328AF9D6100FE330E /* GPlayAppDelegate.swift */; };
+		A7810DD528AF9D6100FE330E /* GPlayAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7810DD328AF9D6100FE330E /* GPlayAppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,7 @@
 		A73BCB6E28AD0860003AB2DC /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73BCB7228AD0860003AB2DC /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		A73BCB7428AD0860003AB2DC /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		A7810DD328AF9D6100FE330E /* GPlayAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPlayAppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,7 @@
 		A73BCB4D28AD0860003AB2DC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A7810DD328AF9D6100FE330E /* GPlayAppDelegate.swift */,
 				A73BCB4E28AD0860003AB2DC /* GPlayApp.swift */,
 				A73BCB4F28AD0860003AB2DC /* ContentView.swift */,
 				A73BCB5028AD0860003AB2DC /* Assets.xcassets */,
@@ -361,6 +365,7 @@
 				A714A15228ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7828AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7628AD0860003AB2DC /* GPlayApp.swift in Sources */,
+				A7810DD428AF9D6100FE330E /* GPlayAppDelegate.swift in Sources */,
 				A714A15828ADF08D009040A3 /* APIConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +377,7 @@
 				A714A15328ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7928AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7728AD0860003AB2DC /* GPlayApp.swift in Sources */,
+				A7810DD528AF9D6100FE330E /* GPlayAppDelegate.swift in Sources */,
 				A714A15928ADF08D009040A3 /* APIConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

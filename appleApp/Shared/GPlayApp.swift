@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct GPlayApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: GPlayAppDelegate
+
     var body: some Scene {
         WindowGroup {
             ContentView()
