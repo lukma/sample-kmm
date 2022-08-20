@@ -1,6 +1,7 @@
 package com.gplay.app.feature.login
 
 import com.gplay.core.domain.validation.ValidationStates
+import com.gplay.core.domain.validation.key
 
 data class LoginUiState(
     val username: String = "",
@@ -9,7 +10,7 @@ data class LoginUiState(
     val isSignedIn: Boolean = false,
     val error: Throwable? = null,
     val validations: ValidationStates = mapOf(
-        LoginFormSpec.Username to null,
-        LoginFormSpec.Password to null,
+        LoginFormSpec.Username.key to null,
+        LoginFormSpec.Password.key to null,
     ),
 )

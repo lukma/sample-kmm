@@ -5,7 +5,7 @@ sealed class ValidationState {
     data class Invalid(val error: ValidationError) : ValidationState()
 }
 
-typealias ValidationStates = Map<FieldSpec, ValidationState?>
+typealias ValidationStates = Map<String, ValidationState?>
 
 fun ValidationStates.isAllValid(): Boolean {
     if (isEmpty()) return false

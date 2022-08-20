@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gplay.core.domain.auth.usecase.SignInUseCase
 import com.gplay.core.domain.validation.FieldToValidate
+import com.gplay.core.domain.validation.makeFieldToValidate
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,14 +43,14 @@ class LoginViewModel(
         if (uiState.value.username != value) {
             _uiState.update { it.copy(username = value) }
         }
-        onValidate(toValidate = Pair(LoginFormSpec.Username, value))
+        onValidate(toValidate = LoginFormSpec.Username.makeFieldToValidate(value))
     }
 
     private suspend fun onPasswordChanged(value: String) {
         if (uiState.value.password != value) {
             _uiState.update { it.copy(password = value) }
         }
-        onValidate(toValidate = Pair(LoginFormSpec.Password, value))
+        onValidate(toValidate = LoginFormSpec.Username.makeFieldToValidate(value))
     }
 
     private suspend fun onValidate(toValidate: FieldToValidate) {

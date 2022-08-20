@@ -12,17 +12,17 @@ class FormValidationUseCase : FlowUseCase<FormValidationUseCase.Param, Validatio
     override suspend fun build(): Flow<ValidationStates> {
         return flow {
             val current = param.current.toMutableMap()
-            val (field, value) = param.toValidate
+            val (key, rules, value) = param.toValidate
 
             var state: ValidationState = ValidationState.Valid
-            for (rule in field.rules) {
+            for (rule in rules) {
                 val error = rule.onValidate(value)
                 if (error != null) {
                     state = ValidationState.Invalid(error)
                     break
                 }
             }
-            current[field] = state
+            current[key] = state
 
             emit(current)
         }

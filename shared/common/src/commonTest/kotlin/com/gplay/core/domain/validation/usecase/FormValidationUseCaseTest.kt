@@ -12,7 +12,7 @@ class FormValidationUseCaseTest {
     @Test
     fun `perform validate field when receive valid value`() = runTest {
         // given
-        val toValidate = Pair(SampleFormSpec.SomeField, "ok")
+        val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("ok")
         val current: ValidationStates = mapOf()
 
         // when
@@ -21,7 +21,7 @@ class FormValidationUseCaseTest {
 
         // then
         val expected: ValidationStates = mapOf(
-            SampleFormSpec.SomeField to ValidationState.Valid,
+            SampleFormSpec.SomeField.key to ValidationState.Valid,
         )
         assertEquals(expected, actual)
     }
@@ -29,7 +29,7 @@ class FormValidationUseCaseTest {
     @Test
     fun `perform validate field when receive invalid value`() = runTest {
         // given
-        val toValidate = Pair(SampleFormSpec.SomeField, "")
+        val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("")
         val current: ValidationStates = mapOf()
 
         // when
@@ -38,7 +38,7 @@ class FormValidationUseCaseTest {
 
         // then
         val expected: ValidationStates = mapOf(
-            SampleFormSpec.SomeField to ValidationState.Invalid(ValidationError.FieldBlank),
+            SampleFormSpec.SomeField.key to ValidationState.Invalid(ValidationError.FieldBlank),
         )
         assertEquals(expected, actual)
     }

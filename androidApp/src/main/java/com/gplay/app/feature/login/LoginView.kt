@@ -24,6 +24,7 @@ import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.core.domain.validation.isAllValid
+import com.gplay.core.domain.validation.key
 import kotlinx.coroutines.launch
 
 @Composable
@@ -80,7 +81,7 @@ fun LoginView(
                 top.linkTo(topGuideline)
                 end.linkTo(parent.end)
             },
-            validation = uiState.validations[LoginFormSpec.Username],
+            validation = uiState.validations[LoginFormSpec.Username.key],
         )
 
         PasswordTextField(
@@ -91,7 +92,7 @@ fun LoginView(
                 top.linkTo(usernameTextField.bottom)
                 end.linkTo(parent.end)
             },
-            validation = uiState.validations[LoginFormSpec.Password],
+            validation = uiState.validations[LoginFormSpec.Password.key],
         )
 
         Button(

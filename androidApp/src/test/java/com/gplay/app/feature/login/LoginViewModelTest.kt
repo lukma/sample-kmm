@@ -3,10 +3,7 @@ package com.gplay.app.feature.login
 import com.gplay.app.util.CoroutinesTestRule
 import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.auth.usecase.SignInUseCase
-import com.gplay.core.domain.validation.FieldSpec
-import com.gplay.core.domain.validation.ValidationError
-import com.gplay.core.domain.validation.ValidationState
-import com.gplay.core.domain.validation.ValidationStates
+import com.gplay.core.domain.validation.*
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
@@ -40,7 +37,7 @@ class LoginViewModelTest {
         val expected = LoginUiState(
             username = TestSamples.username,
             validations = createValidationValues(
-                custom = Pair(LoginFormSpec.Username, ValidationState.Valid),
+                custom = LoginFormSpec.Username to ValidationState.Valid,
             ),
         )
         assertEquals(expected, actual)
@@ -55,10 +52,7 @@ class LoginViewModelTest {
         // then
         val expected = LoginUiState(
             validations = createValidationValues(
-                custom = Pair(
-                    LoginFormSpec.Username,
-                    ValidationState.Invalid(ValidationError.FieldBlank),
-                ),
+                custom = LoginFormSpec.Username to ValidationState.Invalid(ValidationError.FieldBlank),
             ),
         )
         assertEquals(expected, actual)
@@ -74,7 +68,7 @@ class LoginViewModelTest {
         val expected = LoginUiState(
             password = TestSamples.password,
             validations = createValidationValues(
-                custom = Pair(LoginFormSpec.Password, ValidationState.Valid),
+                custom = LoginFormSpec.Password to ValidationState.Valid,
             ),
         )
         assertEquals(expected, actual)
@@ -89,10 +83,7 @@ class LoginViewModelTest {
         // then
         val expected = LoginUiState(
             validations = createValidationValues(
-                custom = Pair(
-                    LoginFormSpec.Password,
-                    ValidationState.Invalid(ValidationError.FieldBlank),
-                ),
+                custom = LoginFormSpec.Password to ValidationState.Invalid(ValidationError.FieldBlank),
                 default = null,
             ),
         )
@@ -150,8 +141,8 @@ class LoginViewModelTest {
         custom: Pair<FieldSpec, ValidationState?>? = null,
         default: ValidationState? = null,
     ): ValidationStates {
-        return LoginFormSpec.values().associateWith {
-            if (it == custom?.first) custom.second else default
+        return LoginFormSpec.values().associate {
+            it.key to if (it.key == custom?.first?.key) custom.second else default
         }
     }
 }
