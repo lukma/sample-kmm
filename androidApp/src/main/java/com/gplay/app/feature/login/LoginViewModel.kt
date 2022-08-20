@@ -50,7 +50,7 @@ class LoginViewModel(
         if (uiState.value.password != value) {
             _uiState.update { it.copy(password = value) }
         }
-        onValidate(toValidate = LoginFormSpec.Username.makeFieldToValidate(value))
+        onValidate(toValidate = LoginFormSpec.Password.makeFieldToValidate(value))
     }
 
     private suspend fun onValidate(toValidate: FieldToValidate) {
