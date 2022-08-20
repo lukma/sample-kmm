@@ -8,7 +8,7 @@
 import SwiftUI
 import common
 
-class GPlayAppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
+class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // Setup Koin
