@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A7124C1B28B15829000128F9 /* ValidationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7124C1A28B15829000128F9 /* ValidationExt.swift */; };
 		A7124C1C28B15829000128F9 /* ValidationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7124C1A28B15829000128F9 /* ValidationExt.swift */; };
+		A7124C2028B15921000128F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7124C1F28B15921000128F9 /* LoginView.swift */; };
+		A7124C2128B15921000128F9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7124C1F28B15921000128F9 /* LoginView.swift */; };
 		A714A15228ADEFDA009040A3 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */; };
 		A714A15328ADEFDA009040A3 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */; };
 		A714A15828ADF08D009040A3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A714A15728ADF08D009040A3 /* APIConfiguration.swift */; };
@@ -46,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		A7124C1A28B15829000128F9 /* ValidationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationExt.swift; sourceTree = "<group>"; };
+		A7124C1F28B15921000128F9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A714A14728ADEADD009040A3 /* GPlay--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GPlay--iOS--Info.plist"; sourceTree = "<group>"; };
 		A714A14828ADEAFD009040A3 /* GPlay--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GPlay--macOS--Info.plist"; sourceTree = "<group>"; };
 		A714A15128ADEFDA009040A3 /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
@@ -105,6 +108,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		A7124C1D28B1590B000128F9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A7124C1E28B15912000128F9 /* Login */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A7124C1E28B15912000128F9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A7124C1F28B15921000128F9 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		A714A14A28ADED13009040A3 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +150,7 @@
 		A73BCB4D28AD0860003AB2DC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A7124C1D28B1590B000128F9 /* Features */,
 				A7D7BDBE28B1084F00CE30DA /* Resources */,
 				A7124C1928B157A3000128F9 /* Utils */,
 				A73BCB4E28AD0860003AB2DC /* GPlayApp.swift */,
@@ -383,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7124C1B28B15829000128F9 /* ValidationExt.swift in Sources */,
+				A7124C2028B15921000128F9 /* LoginView.swift in Sources */,
 				A714A15228ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7828AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7628AD0860003AB2DC /* GPlayApp.swift in Sources */,
@@ -396,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7124C1C28B15829000128F9 /* ValidationExt.swift in Sources */,
+				A7124C2128B15921000128F9 /* LoginView.swift in Sources */,
 				A714A15328ADEFDA009040A3 /* BuildConfiguration.swift in Sources */,
 				A73BCB7928AD0860003AB2DC /* ContentView.swift in Sources */,
 				A73BCB7728AD0860003AB2DC /* GPlayApp.swift in Sources */,
