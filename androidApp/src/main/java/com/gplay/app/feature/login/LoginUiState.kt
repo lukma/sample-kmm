@@ -8,8 +8,8 @@ data class LoginUiState(
     val isLoading: Boolean = false,
     val isSignedIn: Boolean = false,
     val error: Throwable? = null,
-    val validations: Map<String, ValidationState?> = mapOf(
-        LoginFormSpec.Username.key to null,
-        LoginFormSpec.Password.key to null,
+    val validations: Map<String, ValidationState> = mapOf(
+        LoginFormSpec.Username.key to ValidationState.None,
+        LoginFormSpec.Password.key to ValidationState.None,
     ),
 )

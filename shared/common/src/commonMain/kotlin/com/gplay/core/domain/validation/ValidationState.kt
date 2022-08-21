@@ -1,17 +1,12 @@
 package com.gplay.core.domain.validation
 
 sealed class ValidationState {
+    object None : ValidationState()
     object Valid : ValidationState()
     data class Invalid(val error: ValidationError) : ValidationState()
 }
 
-fun Map<String, ValidationState?>.isAllValid(): Boolean {
+fun Map<String, ValidationState>.isAllValid(): Boolean {
     if (isEmpty()) return false
-
-    forEach { (_, value) ->
-        if (value == null || value is ValidationState.Invalid) {
-            return false
-        }
-    }
-    return true
+    return all { (_, value) -> value is ValidationState.Valid }
 }

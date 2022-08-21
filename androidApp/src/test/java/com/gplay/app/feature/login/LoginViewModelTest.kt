@@ -84,7 +84,6 @@ class LoginViewModelTest {
         val expected = LoginUiState(
             validations = createValidationValues(
                 custom = LoginFormSpec.Password to ValidationState.Invalid(ValidationError.FieldBlank),
-                default = null,
             ),
         )
         assertEquals(expected, actual)
@@ -138,8 +137,8 @@ class LoginViewModelTest {
     }
 
     private fun createValidationValues(
-        custom: Pair<FieldSpec, ValidationState?>? = null,
-        default: ValidationState? = null,
+        custom: Pair<FieldSpec, ValidationState>? = null,
+        default: ValidationState = ValidationState.None,
     ) = LoginFormSpec.values().associate {
         it.key to if (it.key == custom?.first?.key) custom.second else default
     }

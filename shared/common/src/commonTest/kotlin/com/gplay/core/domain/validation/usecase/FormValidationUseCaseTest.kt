@@ -13,7 +13,7 @@ class FormValidationUseCaseTest {
     fun `perform validate field when receive valid value`() = runTest {
         // given
         val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("ok")
-        val current = mapOf<String, ValidationState?>()
+        val current = mapOf<String, ValidationState>()
 
         // when
         val param = FormValidationUseCase.Param(toValidate, current)
@@ -30,7 +30,7 @@ class FormValidationUseCaseTest {
     fun `perform validate field when receive invalid value`() = runTest {
         // given
         val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("")
-        val current = mapOf<String, ValidationState?>()
+        val current = mapOf<String, ValidationState>()
 
         // when
         val param = FormValidationUseCase.Param(toValidate, current)

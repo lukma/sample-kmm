@@ -97,8 +97,8 @@ class LoginUiState: ObservableObject {
     @Published var isError = false
     @Published var errorMessage = ""
     @Published var validations: [LoginFormSpec:ValidationState] = [
-        .username: ValidationState.Valid(),
-        .password: ValidationState.Valid()
+        .username: ValidationState.None(),
+        .password: ValidationState.None()
     ]
 }
 
