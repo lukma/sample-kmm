@@ -5,9 +5,7 @@ sealed class ValidationState {
     data class Invalid(val error: ValidationError) : ValidationState()
 }
 
-typealias ValidationStates = Map<String, ValidationState?>
-
-fun ValidationStates.isAllValid(): Boolean {
+fun Map<String, ValidationState?>.isAllValid(): Boolean {
     if (isEmpty()) return false
 
     forEach { (_, value) ->

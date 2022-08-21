@@ -3,26 +3,25 @@ package com.gplay.core.domain.validation.usecase
 import com.gplay.core.domain.common.usecase.FlowUseCase
 import com.gplay.core.domain.validation.FieldToValidate
 import com.gplay.core.domain.validation.ValidationState
-import com.gplay.core.domain.validation.ValidationStates
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FormValidationUseCase : FlowUseCase<FormValidationUseCase.Param, ValidationStates>() {
+class FormValidationUseCase :
+    FlowUseCase<FormValidationUseCase.Param, Map<String, ValidationState?>>() {
 
-    override suspend fun build(): Flow<ValidationStates> {
+    override suspend fun build(): Flow<Map<String, ValidationState?>> {
         return flow {
             val current = param.current.toMutableMap()
-            val (key, rules, value) = param.toValidate
 
             var state: ValidationState = ValidationState.Valid
-            for (rule in rules) {
-                val error = rule.onValidate(value)
+            for (rule in param.toValidate.rules) {
+                val error = rule.onValidate(param.toValidate.value)
                 if (error != null) {
                     state = ValidationState.Invalid(error)
                     break
                 }
             }
-            current[key] = state
+            current[param.toValidate.key] = state
 
             emit(current)
         }
@@ -30,6 +29,6 @@ class FormValidationUseCase : FlowUseCase<FormValidationUseCase.Param, Validatio
 
     data class Param(
         val toValidate: FieldToValidate,
-        val current: ValidationStates,
+        val current: Map<String, ValidationState?>,
     )
 }

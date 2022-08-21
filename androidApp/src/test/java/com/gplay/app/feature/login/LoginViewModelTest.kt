@@ -140,9 +140,7 @@ class LoginViewModelTest {
     private fun createValidationValues(
         custom: Pair<FieldSpec, ValidationState?>? = null,
         default: ValidationState? = null,
-    ): ValidationStates {
-        return LoginFormSpec.values().associate {
-            it.key to if (it.key == custom?.first?.key) custom.second else default
-        }
+    ) = LoginFormSpec.values().associate {
+        it.key to if (it.key == custom?.first?.key) custom.second else default
     }
 }

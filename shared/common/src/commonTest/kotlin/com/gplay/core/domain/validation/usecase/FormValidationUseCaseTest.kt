@@ -13,14 +13,14 @@ class FormValidationUseCaseTest {
     fun `perform validate field when receive valid value`() = runTest {
         // given
         val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("ok")
-        val current: ValidationStates = mapOf()
+        val current = mapOf<String, ValidationState?>()
 
         // when
         val param = FormValidationUseCase.Param(toValidate, current)
         val actual = useCase(param).single()
 
         // then
-        val expected: ValidationStates = mapOf(
+        val expected = mapOf(
             SampleFormSpec.SomeField.key to ValidationState.Valid,
         )
         assertEquals(expected, actual)
@@ -30,20 +30,26 @@ class FormValidationUseCaseTest {
     fun `perform validate field when receive invalid value`() = runTest {
         // given
         val toValidate = SampleFormSpec.SomeField.makeFieldToValidate("")
-        val current: ValidationStates = mapOf()
+        val current = mapOf<String, ValidationState?>()
 
         // when
         val param = FormValidationUseCase.Param(toValidate, current)
         val actual = useCase(param).single()
 
         // then
-        val expected: ValidationStates = mapOf(
+        val expected = mapOf(
             SampleFormSpec.SomeField.key to ValidationState.Invalid(ValidationError.FieldBlank),
         )
         assertEquals(expected, actual)
     }
 }
 
-enum class SampleFormSpec(override val rules: List<FieldRule>) : FieldSpec {
-    SomeField(rules = listOf(FieldRule.NoFieldBlank));
+enum class SampleFormSpec(
+    override val key: String,
+    override val rules: List<FieldRule>,
+) : FieldSpec {
+    SomeField(
+        key = "someKey",
+        rules = listOf(FieldRule.NoFieldBlank),
+    );
 }

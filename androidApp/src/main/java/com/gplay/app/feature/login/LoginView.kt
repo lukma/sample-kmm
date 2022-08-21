@@ -24,7 +24,6 @@ import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.core.domain.validation.isAllValid
-import com.gplay.core.domain.validation.key
 import kotlinx.coroutines.launch
 
 @Composable
