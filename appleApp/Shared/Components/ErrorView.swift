@@ -13,11 +13,14 @@ struct ErrorView: View {
     
     var body: some View {
         VStack {
+            LottieView(animation: "CommonErrorAnimation")
+                .frame(width: 200, height: 200)
+            
             Text(errorMessage)
                 .font(.title2)
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
-                .padding()
+                .padding(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
             
             Button("Retry", action: retryAction)
                 .buttonStyle(.borderedProminent)
