@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.gplay.android.navigation.build
 import com.gplay.app.feature.home.HomeScreen
 import com.gplay.app.feature.login.LoginScreen
 import com.gplay.app.main.MainUiEvent
 import com.gplay.app.main.MainUiState
 import com.gplay.app.ui.theme.GPlayTheme
+import com.gplay.compose.navigation.build
 
 @Composable
 fun GPlayApp(

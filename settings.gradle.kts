@@ -10,7 +10,7 @@ pluginManagement {
 rootProject.name = "GPlay"
 include(
     ":shared:common",
-    ":shared:android-navigation",
+    ":shared:compose-navigation",
     ":shared:android-uikit",
     ":androidApp",
 )
