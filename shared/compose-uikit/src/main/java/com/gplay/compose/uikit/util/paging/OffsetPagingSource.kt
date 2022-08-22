@@ -1,4 +1,4 @@
-package com.gplay.android.uikit.util.paging
+package com.gplay.compose.uikit.util.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

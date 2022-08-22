@@ -16,13 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.gplay.android.uikit.ui.PasswordTextField
-import com.gplay.android.uikit.ui.UsernameTextField
-import com.gplay.android.uikit.util.compose.visibilityBy
 import com.gplay.app.R
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.LocalScaffoldController
 import com.gplay.app.ui.theme.GPlayTheme
+import com.gplay.compose.uikit.ui.PasswordTextField
+import com.gplay.compose.uikit.ui.UsernameTextField
+import com.gplay.compose.uikit.util.compose.visibilityBy
 import com.gplay.core.domain.validation.isAllValid
 import kotlinx.coroutines.launch
 

@@ -14,10 +14,10 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.gplay.android.uikit.ui.ErrorView
 import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.app.util.TestSamples
+import com.gplay.compose.uikit.ui.ErrorView
 import com.gplay.core.domain.article.Article
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Clock

@@ -1,4 +1,4 @@
-package com.gplay.android.uikit.util.validation
+package com.gplay.compose.uikit.util.validation
 
 import android.content.Context
 import com.gplay.android.uikit.R

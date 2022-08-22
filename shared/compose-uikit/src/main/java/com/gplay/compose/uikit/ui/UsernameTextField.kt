@@ -1,4 +1,4 @@
-package com.gplay.android.uikit.ui
+package com.gplay.compose.uikit.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -20,8 +20,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import com.gplay.android.uikit.R
-import com.gplay.android.uikit.util.compose.visibilityBy
-import com.gplay.android.uikit.util.validation.errorMessage
+import com.gplay.compose.uikit.util.compose.visibilityBy
+import com.gplay.compose.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
 
 @Composable

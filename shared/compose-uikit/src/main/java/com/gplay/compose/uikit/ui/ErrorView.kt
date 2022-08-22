@@ -1,4 +1,4 @@
-package com.gplay.android.uikit.ui
+package com.gplay.compose.uikit.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

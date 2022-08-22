@@ -1,4 +1,4 @@
-package com.gplay.android.uikit.util.compose
+package com.gplay.compose.uikit.util.compose
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha

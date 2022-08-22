@@ -11,6 +11,6 @@ rootProject.name = "GPlay"
 include(
     ":shared:common",
     ":shared:compose-navigation",
-    ":shared:android-uikit",
+    ":shared:compose-uikit",
     ":androidApp",
 )

@@ -35,7 +35,7 @@ dependencies {
     // Internal Module
     implementation(project(":shared:common"))
     implementation(project(":shared:compose-navigation"))
-    implementation(project(":shared:android-uikit"))
+    implementation(project(":shared:compose-uikit"))
 
     // Androidx
     implementation(libs.androidx.startup)

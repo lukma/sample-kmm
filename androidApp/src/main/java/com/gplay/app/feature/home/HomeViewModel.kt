@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.gplay.android.uikit.util.paging.OffsetPagingSource
+import com.gplay.compose.uikit.util.paging.OffsetPagingSource
 import com.gplay.core.domain.article.usecase.GetArticlesUseCase
 import com.gplay.core.domain.common.entity.PagingParams
 import kotlinx.coroutines.flow.Flow
