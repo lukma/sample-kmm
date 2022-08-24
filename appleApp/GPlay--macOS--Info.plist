@@ -4,5 +4,18 @@
 <dict>
 	<key>Configuration</key>
 	<string>$(CONFIGURATION)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+	    <key>NSExceptionDomains</key>
+        <dict>
+            <key>virtserver.swaggerhub.com</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
 </dict>
 </plist>
