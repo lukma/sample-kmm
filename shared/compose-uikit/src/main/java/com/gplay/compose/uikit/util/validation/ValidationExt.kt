@@ -1,7 +1,7 @@
 package com.gplay.compose.uikit.util.validation
 
 import android.content.Context
-import com.gplay.android.uikit.R
+import com.gplay.compose.uikit.R
 import com.gplay.core.domain.validation.ValidationError
 import com.gplay.core.domain.validation.ValidationState
 

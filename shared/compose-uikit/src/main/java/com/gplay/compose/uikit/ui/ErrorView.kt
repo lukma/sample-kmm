@@ -19,7 +19,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.gplay.android.uikit.R
+import com.gplay.compose.uikit.R
 
 @Composable
 fun ErrorView(

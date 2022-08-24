@@ -20,7 +20,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.gplay.android.uikit.R
+import com.gplay.compose.uikit.R
 import com.gplay.compose.uikit.util.compose.visibilityBy
 import com.gplay.compose.uikit.util.validation.errorMessage
 import com.gplay.core.domain.validation.ValidationState
