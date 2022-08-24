@@ -10,11 +10,8 @@ import common
 extension Dictionary where Value == ValidationState {
     func errorMessage(forKey: Key) -> String {
         let state = self[forKey] as? ValidationState.Invalid
-        if state != nil {
-            return state!.error.errorMessage()
-        } else {
-            return ""
-        }
+        guard let error = state?.error else { return "" }
+        return error.errorMessage()
     }
 }
 
