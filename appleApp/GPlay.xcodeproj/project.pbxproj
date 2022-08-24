@@ -21,6 +21,7 @@
 		A73BCB7728AD0860003AB2DC /* GPlayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB4E28AD0860003AB2DC /* GPlayApp.swift */; };
 		A73BCB7A28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
 		A73BCB7B28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
+		A76142FB28B6665F001A3E20 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = A76142FA28B6665F001A3E20 /* KMPNativeCoroutinesAsync */; };
 		A77B016528B2AFBA00A32221 /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B016428B2AFBA00A32221 /* ValidationExtensions.swift */; };
 		A77B016628B2AFBA00A32221 /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B016428B2AFBA00A32221 /* ValidationExtensions.swift */; };
 		A77B016828B2AFE800A32221 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B016728B2AFE800A32221 /* StringExtensions.swift */; };
@@ -95,6 +96,7 @@
 			files = (
 				A77B017B28B2BF4C00A32221 /* Lottie in Frameworks */,
 				A7C4E64D28B3EF4E00CB35AD /* FlowStacks in Frameworks */,
+				A76142FB28B6665F001A3E20 /* KMPNativeCoroutinesAsync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +271,7 @@
 			packageProductDependencies = (
 				A77B017A28B2BF4C00A32221 /* Lottie */,
 				A7C4E64C28B3EF4E00CB35AD /* FlowStacks */,
+				A76142FA28B6665F001A3E20 /* KMPNativeCoroutinesAsync */,
 			);
 			productName = "GPlay (iOS)";
 			productReference = A73BCB5528AD0860003AB2DC /* GPlay.app */;
@@ -366,6 +369,7 @@
 			packageReferences = (
 				A77B017928B2BF4C00A32221 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				A7C4E64B28B3EF4E00CB35AD /* XCRemoteSwiftPackageReference "FlowStacks" */,
+				A76142F928B6665F001A3E20 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 			);
 			productRefGroup = A73BCB5628AD0860003AB2DC /* Products */;
 			projectDirPath = "";
@@ -1235,6 +1239,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A76142F928B6665F001A3E20 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.6;
+			};
+		};
 		A77B017928B2BF4C00A32221 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -1254,6 +1266,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A76142FA28B6665F001A3E20 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A76142F928B6665F001A3E20 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesAsync;
+		};
 		A77B017A28B2BF4C00A32221 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A77B017928B2BF4C00A32221 /* XCRemoteSwiftPackageReference "lottie-ios" */;

@@ -5,6 +5,7 @@ plugins {
     id("gplay.multiplatform.library")
     kotlin("plugin.serialization")
     id(libs.plugins.sqldelight.get().pluginId)
+    alias(libs.plugins.nativecoroutines)
 }
 
 kotlin {
