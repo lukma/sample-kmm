@@ -1,4 +1,4 @@
-CREATE TABLE article (
+CREATE TABLE articleTable (
   id TEXT NOT NULL PRIMARY KEY,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
@@ -7,11 +7,11 @@ CREATE TABLE article (
 );
 
 upsert:
-INSERT OR REPLACE INTO article(id, title, content, thumbnail, createdAt)
+INSERT OR REPLACE INTO articleTable(id, title, content, thumbnail, createdAt)
 VALUES ?;
 
 finds:
 SELECT *
-FROM article
+FROM articleTable
 ORDER BY createdAt
 LIMIT :limit OFFSET :offset;

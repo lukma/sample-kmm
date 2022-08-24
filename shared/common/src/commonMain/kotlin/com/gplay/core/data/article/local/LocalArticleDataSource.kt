@@ -16,7 +16,7 @@ internal class LocalArticleDataSource(private val database: AppDatabase) : Artic
         try {
             database.transaction {
                 articles.forEach {
-                    database.articleQueries.upsert(article = it.toLocalArticle())
+                    database.articleQueries.upsert(articleTable = it.toArticleTable())
                 }
             }
         } catch (ex: Exception) {

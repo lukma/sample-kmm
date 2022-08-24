@@ -1,9 +1,10 @@
 package com.gplay.core.data.article.local
 
+import com.gplay.core.data.db.ArticleTable
 import com.gplay.core.domain.article.Article
 import kotlinx.datetime.toInstant
 
-internal fun Article.toLocalArticle() = com.gplay.core.data.db.Article(
+internal fun Article.toArticleTable() = ArticleTable(
     id = id,
     title = title,
     content = content,

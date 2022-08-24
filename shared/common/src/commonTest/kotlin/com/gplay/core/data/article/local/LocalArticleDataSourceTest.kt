@@ -58,7 +58,7 @@ class LocalArticleDataSourceTest : DatabaseTest {
     fun `perform get articles got value`() = runTest {
         // given
         database.articleQueries
-            .upsert(article = TestSamples.articles.first().toLocalArticle())
+            .upsert(articleTable = TestSamples.articles.first().toArticleTable())
 
         // when
         val actual = dataSource.getArticles(paging = TestSamples.pagingParams)
