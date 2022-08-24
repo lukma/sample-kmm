@@ -3,7 +3,10 @@ package com.gplay.app.feature.login
 import com.gplay.app.util.CoroutinesTestRule
 import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.auth.usecase.SignInUseCase
-import com.gplay.core.domain.validation.*
+import com.gplay.core.domain.common.entity.Result
+import com.gplay.core.domain.validation.FieldSpec
+import com.gplay.core.domain.validation.ValidationError
+import com.gplay.core.domain.validation.ValidationState
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
@@ -92,7 +95,7 @@ class LoginViewModelTest {
     @Test
     fun `perform sign in got success`() {
         // given
-        coEvery { signInUseCase(any()) } returns Result.success(Unit)
+        coEvery { signInUseCase(any()) } returns Result.Success(Unit)
 
         // when
         viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))
@@ -118,7 +121,7 @@ class LoginViewModelTest {
     @Test
     fun `perform sign in got failure`() {
         // given
-        coEvery { signInUseCase(any()) } returns Result.failure(TestSamples.error)
+        coEvery { signInUseCase(any()) } returns Result.Failure(TestSamples.error)
 
         // when
         viewModel.sendEvent(LoginUiEvent.TypeUsername(TestSamples.username))

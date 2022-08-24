@@ -1,6 +1,7 @@
 package com.gplay.core.domain.auth.usecase
 
 import com.gplay.core.domain.auth.AuthRepository
+import com.gplay.core.domain.common.entity.Result
 import com.gplay.core.util.TestSamples
 import io.mockk.coEvery
 import io.mockk.coJustRun
@@ -10,7 +11,6 @@ import kotlinx.coroutines.flow.flow
 import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 import kotlin.test.assertEquals
-import kotlin.test.assertFails
 
 class SignInUseCaseTest {
     private val authRepository: AuthRepository = mockk()
@@ -30,7 +30,7 @@ class SignInUseCaseTest {
         val actual = useCase(useCaseParam)
 
         // then
-        val expected = Result.success(Unit)
+        val expected = Result.Success(Unit)
         assertEquals(expected, actual)
         coVerify {
             authRepository.signIn(username = TestSamples.username, password = TestSamples.password)
@@ -41,12 +41,14 @@ class SignInUseCaseTest {
     @Test
     fun `perform sign in got failure`() = runTest {
         // given
-        coEvery { authRepository.signIn(any(), any()) } returns flow { throw Error() }
+        val error = Error()
+        coEvery { authRepository.signIn(any(), any()) } returns flow { throw error }
 
         // when
         val actual = useCase(useCaseParam)
 
         // then
-        assertFails { actual.getOrThrow() }
+        val expected = Result.Failure(error)
+        assertEquals(expected, actual)
     }
 }

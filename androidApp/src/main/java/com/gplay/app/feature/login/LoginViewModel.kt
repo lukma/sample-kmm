@@ -3,6 +3,8 @@ package com.gplay.app.feature.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gplay.core.domain.auth.usecase.SignInUseCase
+import com.gplay.core.domain.common.entity.onFailure
+import com.gplay.core.domain.common.entity.onSuccess
 import com.gplay.core.domain.validation.FieldToValidate
 import com.gplay.core.domain.validation.makeFieldToValidate
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
@@ -70,11 +72,11 @@ class LoginViewModel(
             SignInUseCase.Param(username, password)
         }
         signInUseCase(param)
-            .onFailure { error ->
-                _uiState.update { it.copy(error = error, isLoading = false) }
-            }
             .onSuccess {
                 _uiState.update { it.copy(isSignedIn = true, isLoading = false) }
+            }
+            .onFailure { error ->
+                _uiState.update { it.copy(error = error, isLoading = false) }
             }
     }
 }

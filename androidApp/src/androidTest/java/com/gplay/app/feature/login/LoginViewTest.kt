@@ -8,6 +8,7 @@ import com.gplay.app.ui.GPlayScaffold
 import com.gplay.app.ui.theme.GPlayTheme
 import com.gplay.app.util.TestSamples
 import com.gplay.core.domain.auth.usecase.SignInUseCase
+import com.gplay.core.domain.common.entity.Result
 import com.gplay.core.domain.validation.usecase.FormValidationUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -97,7 +98,7 @@ class LoginViewTest {
     @Test
     fun perform_sign_in_got_success() {
         // given
-        coEvery { signInUseCase(any()) } returns Result.success(Unit)
+        coEvery { signInUseCase(any()) } returns Result.Success(Unit)
 
         // when
         composeTestRule.onNode(hasTestTag("SignInButton"))
@@ -120,7 +121,7 @@ class LoginViewTest {
     @Test
     fun perform_sign_in_got_failure() {
         // given
-        coEvery { signInUseCase(any()) } returns Result.failure(TestSamples.error)
+        coEvery { signInUseCase(any()) } returns Result.Failure(TestSamples.error)
 
         // when
         composeTestRule.onNode(hasTestTag("UsernameTextField"))
