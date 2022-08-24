@@ -22,7 +22,7 @@ struct ArticleItem: View {
                 .foregroundColor(.primary)
                 .padding(.init(top: 0, leading: 8, bottom: 0, trailing: 8))
             
-            Text(article.content.stripOutHtml() ?? "")
+            Text(article.content)
                 .font(.body)
                 .foregroundColor(.secondary)
                 .lineLimit(3)
@@ -47,7 +47,7 @@ struct ArticleItem_Previews: PreviewProvider {
             title: "Lorem ipsum",
             content: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis molestie orci at scelerisque. Vestibulum finibus iaculis pellentesque. Phasellus ornare commodo purus in sagittis. In sodales pretium orci non facilisis. Ut molestie egestas neque, in viverra arcu pellentesque sit amet. Aliquam auctor turpis ac sagittis tincidunt. Vivamus sed elit vitae risus ultricies dapibus sodales ut libero. Fusce ultricies mauris mauris, et congue ipsum posuere ut. Vestibulum facilisis felis felis, in faucibus nibh tincidunt vel. Duis posuere consectetur bibendum. Suspendisse nunc lacus, elementum id congue vitae, ultricies aliquet massa. Suspendisse suscipit non mauris eget tincidunt. Suspendisse eu erat at metus rutrum scelerisque. Aenean ligula nisl, mattis a erat sit amet, ullamcorper auctor tellus.</p>",
             thumbnail: "https://picsum.photos/id/11/700",
-            createdAt: "2022-12-31T12:00:00.000124Z"
+            createdAt: InstantWrapper(isoString: "2022-12-31T12:00:00.000124Z").value
         )
         ArticleItem(article: article)
     }
