@@ -7,30 +7,39 @@
 
 import SwiftUI
 import FlowStacks
+import common
 
 struct AppCoordinator: View {
-    @State var routes: Routes<Screen> = [.root(.home)]
+    @State private var routes: Routes<Screen> = [.root(.none)]
     
     var body: some View {
         Router($routes) { screen, _ in
             switch screen {
+            case .none:
+                Text("Loading…")
+                    .task { await initRootScreen() }
             case .login:
-                LoginView()
+                LoginView(onSignedIn: onSignedIn)
             case .home:
                 HomeView()
             }
         }
-        .onAppear(perform: checkIsSignedIn)
     }
 }
 
 extension AppCoordinator {
-    func checkIsSignedIn() {
-        // Todo - invoke IsSignedInUseCase
+    private func initRootScreen() async {
+        let isSignedIn = await CommonDependencies.shared.isSignedInUseCase.perform()
+        routes = [.root(isSignedIn ? .home : .login)]
+    }
+    
+    private func onSignedIn() {
+        routes = [.root(.home)]
     }
 }
 
 enum Screen {
+    case none
     case login
     case home
 }
