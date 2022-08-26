@@ -9,7 +9,12 @@ import SwiftUI
 import common
 
 struct LoginView: View {
+    private var onSignedIn: (() -> Void)? = nil
     @StateObject private var uiState = LoginUiState()
+    
+    init(onSignedIn: @escaping () -> Void) {
+        self.onSignedIn = onSignedIn
+    }
     
     var body: some View {
         ZStack {
@@ -44,8 +49,13 @@ struct LoginView: View {
 
                 Button("Sign In", action: signIn)
                     .buttonStyle(.borderedProminent)
+                    .disabled(uiState.isSignedInButtonDisabled)
                     .alert(uiState.errorMessage, isPresented: $uiState.isError) {
                         Button("Retry", action: signIn)
+                        Button("Dismiss") {
+                            uiState.isError = false
+                            uiState.errorMessage = ""
+                        }
                     }
             }
             .padding()
@@ -62,19 +72,28 @@ struct LoginView: View {
 
 extension LoginView {
     private func validate(_ field: LoginFormSpec, value: String) {
-        let toValidate = FieldToValidate(
-            key: field.rawValue,
-            rules: field.rules(),
-            value: value
-        )
-        let validations = [String:ValidationState](
-            uniqueKeysWithValues: uiState.validations.map { (key, value) in (key.rawValue, value) }
-        )
-        let param = FormValidationUseCase.Param(
-            toValidate: toValidate,
-            current: validations
-        )
-        // Todo - invoke FormValidationUseCase
+        Task {
+            let toValidate = FieldToValidate(
+                key: field.rawValue,
+                rules: field.rules(),
+                value: value
+            )
+            let validations = [String:ValidationState](
+                uniqueKeysWithValues: uiState.validations.map { (key, value) in
+                    (key.rawValue, value)
+                }
+            )
+            let result = await CommonDependencies.shared.formValidationUseCase.perform(
+                toValidate: toValidate,
+                validations: validations
+            )
+            uiState.validations = [LoginFormSpec:ValidationState](
+                uniqueKeysWithValues: result.compactMap { (key, value) in
+                    guard let validationKey = LoginFormSpec(rawValue: key) else { return nil }
+                    return (validationKey, value)
+                }
+            )
+        }
     }
     
     private func signIn() {
@@ -100,6 +119,14 @@ class LoginUiState: ObservableObject {
         .username: ValidationState.None(),
         .password: ValidationState.None()
     ]
+
+    var isSignedInButtonDisabled: Bool {
+        get {
+            validations.contains { (_, state) in
+                state is ValidationState.None || state is ValidationState.Invalid
+            }
+        }
+    }
 }
 
 enum LoginFormSpec: String {
@@ -118,6 +145,6 @@ enum LoginFormSpec: String {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(onSignedIn: {})
     }
 }
