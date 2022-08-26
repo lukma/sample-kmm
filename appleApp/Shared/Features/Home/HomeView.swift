@@ -31,14 +31,20 @@ struct HomeView: View {
 
 extension HomeView {
     func fetchArticles() {
-        let paging = PagingParams<KotlinInt>(
-            key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
-            pageSize: 10
-        )
-        let param = GetArticlesUseCase.Param(
-            paging: paging
-        )
-        // Todo - invoke SignInUseCase
+        Task {
+            let paging = PagingParams<KotlinInt>(
+                key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
+                pageSize: 10
+            )
+            let result = await CommonDependencies.shared.getArticlesUseCase.perform(paging: paging)
+            switch result {
+            case .success(let articles):
+                uiState.articles = articles
+            case .failure(let error):
+                uiState.hasError = true
+                uiState.errorMessage = (error as NSError).domain
+            }
+        }
     }
 }
 
