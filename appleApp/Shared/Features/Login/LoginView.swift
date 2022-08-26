@@ -97,15 +97,24 @@ extension LoginView {
     }
     
     private func signIn() {
-        uiState.isLoading = true
-        uiState.isError = false
-        uiState.errorMessage = ""
-        
-        let param = SignInUseCase.Param(
-            username: uiState.username,
-            password: uiState.password
-        )
-        // Todo - invoke SignInUseCase
+        Task {
+            uiState.isLoading = true
+            uiState.isError = false
+            uiState.errorMessage = ""
+            
+            let result = await CommonDependencies.shared.signedInUseCase.perform(
+                username: uiState.username,
+                password: uiState.password
+            )
+            switch result {
+            case .success(_):
+                onSignedIn?()
+            case .failure(let error):
+                uiState.isLoading = false
+                uiState.isError = true
+                uiState.errorMessage = (error as NSError).domain
+            }
+        }
     }
 }
 
