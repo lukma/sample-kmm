@@ -25,11 +25,11 @@ struct HomeView: View {
             }
             
             if uiState.hasError {
-                ErrorView(errorMessage: uiState.errorMessage) {
+                ErrorView(errorMessage: uiState.errorMessage, retryAction: {
                     Task {
                         await fetchArticles()
                     }
-                }
+                })
             }
         }
         .listStyle(.sidebar)

@@ -17,7 +17,9 @@ struct AppCoordinator: View {
             switch screen {
             case .none:
                 Text("Loading…")
-                    .task { await initRootScreen() }
+                    .task {
+                        await initRootScreen()
+                    }
             case .login:
                 LoginView(onSignedIn: onSignedIn)
             case .home:
