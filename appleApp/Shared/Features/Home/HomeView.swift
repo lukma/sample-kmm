@@ -32,6 +32,9 @@ struct HomeView: View {
 extension HomeView {
     func fetchArticles() {
         Task {
+            uiState.hasError = false
+            uiState.errorMessage = ""
+            
             let paging = PagingParams<KotlinInt>(
                 key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
                 pageSize: 10
@@ -39,9 +42,24 @@ extension HomeView {
             let param = GetArticlesUseCase.Param(paging: paging)
             let result = await CommonDependencies.shared.getArticlesUseCase.perform(param)
             switch result {
-            case .success(let articles):
-                uiState.articles = articles
+            case .success(let paging):
+                if let articles = paging.items as? [Article] {
+                    for article in articles {
+                        uiState.articles.append(article)
+                    }
+                }
+                
+                if let total = (paging as? PagingResultNetwork)?.total {
+                    uiState.hasNextPage = uiState.articles.count < total
+                } else {
+                    uiState.hasNextPage = false
+                }
+                
+                if uiState.hasNextPage {
+                    uiState.loadPage += 1
+                }
             case .failure(let error):
+                uiState.hasNextPage = false
                 uiState.hasError = true
                 uiState.errorMessage = (error as NSError).domain
             }

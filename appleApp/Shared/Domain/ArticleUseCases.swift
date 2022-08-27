@@ -9,20 +9,13 @@ import KMPNativeCoroutinesAsync
 import common
 
 extension GetArticlesUseCase {
-    func perform(_ param: GetArticlesUseCase.Param) async -> Swift.Result<[Article], Error> {
+    func perform(_ param: GetArticlesUseCase.Param) async -> Swift.Result<PagingResult<Article>, Error> {
         do {
-            let flowNative = try await asyncFunction(for: invokeNative(param: param))
-            let stream = asyncStream(for: flowNative)
-            for try await paging in stream {
-                var articles: [Article] = []
-                
-                guard let items = paging?.items else { continue }
-                for item in items {
-                    guard let article = item as? Article else { continue }
-                    articles.append(article)
-                }
-                
-                return .success(articles)
+            let nativeFlow = try await asyncFunction(for: invokeNative(param: param))
+            let stream = asyncStream(for: nativeFlow)
+            for try await item in stream {
+                guard let item = item else { continue }
+                return .success(item)
             }
         } catch {
             return .failure(error)
