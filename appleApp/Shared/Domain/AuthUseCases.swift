@@ -27,17 +27,17 @@ extension IsSignedInUseCase {
 
 extension SignInUseCase {
     func perform(_ param: SignInUseCase.Param) async -> Swift.Result<Void, Error> {
-        var result: Swift.Result<Void, Error> = .failure(NSError(domain: "Unexpected error", code: -1))
-        
-        let nativeSuspend = await asyncResult(for: invokeNative(param: param))
-        if case let .success(nativeResult) = nativeSuspend {
-            if nativeResult.isSuccess() {
-                result = .success(())
-            } else if let errorMessage = nativeResult.exceptionOrNull()?.message {
-                result = .failure(NSError(domain: errorMessage, code: -1))
+        do {
+            let result = try await asyncFunction(for: invokeNative(param: param))
+            if result is ResultSuccess {
+                return .success(())
+            } else if let errorMessage = (result as? ResultFailure)?.error.message {
+                return .failure(NSError(domain: errorMessage, code: -1))
+            } else {
+                return .failure(NSError(domain: "Unexpected error", code: -1))
             }
+        } catch {
+            return .failure(error)
         }
-        
-        return result
     }
 }
