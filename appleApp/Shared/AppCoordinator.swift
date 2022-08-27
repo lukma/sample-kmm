@@ -29,8 +29,13 @@ struct AppCoordinator: View {
 
 extension AppCoordinator {
     private func initRootScreen() async {
-        let isSignedIn = await CommonDependencies.shared.isSignedInUseCase.perform()
-        routes = [.root(isSignedIn ? .home : .login)]
+        let result = await CommonDependencies.shared.isSignedInUseCase.perform()
+        switch result {
+        case .success(let isSignedIn):
+            routes = [.root(isSignedIn ? .home : .login)]
+        case .failure(_):
+            routes = [.root(.login)]
+        }
     }
     
     private func onSignedIn() {

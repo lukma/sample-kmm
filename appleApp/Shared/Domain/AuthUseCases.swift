@@ -9,18 +9,19 @@ import KMPNativeCoroutinesAsync
 import common
 
 extension IsSignedInUseCase {
-    func perform() async -> Bool {
+    func perform() async -> Swift.Result<Bool, Error> {
         do {
-            let flowNative = try await asyncFunction(for: invokeNative(param: nil))
-            let stream = asyncStream(for: flowNative)
-            for try await isSignedIn in stream {
-                return isSignedIn == true
+            let nativeFlow = try await asyncFunction(for: invokeNative(param: nil))
+            let stream = asyncStream(for: nativeFlow)
+            for try await item in stream {
+                guard let item = item as? Bool else { continue }
+                return .success(item)
             }
         } catch {
-            return false
+            return .failure(error)
         }
         
-        return false
+        return .failure(NSError(domain: "Unexpected error", code: -1))
     }
 }
 
