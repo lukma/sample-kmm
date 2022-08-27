@@ -48,7 +48,7 @@ class SignInUseCaseTest {
         val actual = useCase(useCaseParam)
 
         // then
-        val expected = Result.Failure(error)
+        val expected = Result.Failure<Unit>(error)
         assertEquals(expected, actual)
     }
 }
