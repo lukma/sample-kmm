@@ -9,19 +9,18 @@ import KMPNativeCoroutinesAsync
 import common
 
 extension FormValidationUseCase {
-    func perform(_ param: FormValidationUseCase.Param) async -> [String:ValidationState] {
+    func perform(_ param: FormValidationUseCase.Param) async -> Swift.Result<[String:ValidationState], Error> {
         do {
-            let flowNative = try await asyncFunction(for: invokeNative(param: param))
-            let stream = asyncStream(for: flowNative)
-            for try await validations in stream {
-                if let validations = validations as? [String:ValidationState] {
-                    return validations
-                }
+            let nativeFlow = try await asyncFunction(for: invokeNative(param: param))
+            let stream = asyncStream(for: nativeFlow)
+            for try await item in stream {
+                guard let item = item as? [String:ValidationState] else { continue }
+                return .success(item)
             }
         } catch {
-            return param.current
+            return .failure(error)
         }
         
-        return param.current
+        return .failure(NSError(domain: "Unexpected error", code: -1))
     }
 }

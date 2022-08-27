@@ -88,12 +88,14 @@ extension LoginView {
                 current: validations
             )
             let result = await CommonDependencies.shared.formValidationUseCase.perform(param)
-            uiState.validations = [LoginFormSpec:ValidationState](
-                uniqueKeysWithValues: result.compactMap { (key, value) in
-                    guard let validationKey = LoginFormSpec(rawValue: key) else { return nil }
-                    return (validationKey, value)
-                }
-            )
+            if case let .success(validations) = result {
+                uiState.validations = [LoginFormSpec:ValidationState](
+                    uniqueKeysWithValues: validations.compactMap { (key, value) in
+                        guard let validationKey = LoginFormSpec(rawValue: key) else { return nil }
+                        return (validationKey, value)
+                    }
+                )
+            }
         }
     }
     
