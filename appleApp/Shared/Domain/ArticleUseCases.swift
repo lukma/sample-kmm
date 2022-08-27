@@ -10,24 +10,23 @@ import common
 
 extension GetArticlesUseCase {
     func perform(paging: PagingParams<KotlinInt>) async -> Swift.Result<[Article], Error> {
-        let param = GetArticlesUseCase.Param(paging: paging)
-        let nativeSuspend = await asyncResult(for: invokeNative(param: param))
-        if case let .success(nativeFlow) = nativeSuspend {
-            do {
-                let stream = asyncStream(for: nativeFlow)
-                for try await paging in stream {
-                    if let items = paging?.items {
-                        var articles: [Article] = []
-                        for item in items {
-                            guard let article = item as? Article else { continue }
-                            articles.append(article)
-                        }
-                        return .success(articles)
-                    }
+        do {
+            let param = GetArticlesUseCase.Param(paging: paging)
+            let flowNative = try await asyncFunction(for: invokeNative(param: param))
+            let stream = asyncStream(for: flowNative)
+            for try await paging in stream {
+                var articles: [Article] = []
+                
+                guard let items = paging?.items else { continue }
+                for item in items {
+                    guard let article = item as? Article else { continue }
+                    articles.append(article)
                 }
-            } catch {
-                return .failure(error)
+                
+                return .success(articles)
             }
+        } catch {
+            return .failure(error)
         }
         
         return .failure(NSError(domain: "Unexpected error", code: -1))

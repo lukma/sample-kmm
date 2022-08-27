@@ -13,22 +13,20 @@ extension FormValidationUseCase {
         toValidate: FieldToValidate,
         validations: [String:ValidationState]
     ) async -> [String:ValidationState] {
-        let param = FormValidationUseCase.Param(
-            toValidate: toValidate,
-            current: validations
-        )
-        let nativeSuspend = await asyncResult(for: invokeNative(param: param))
-        if case let .success(nativeFlow) = nativeSuspend {
-            do {
-                let stream = asyncStream(for: nativeFlow)
-                for try await validations in stream {
-                    if let validations = validations as? [String:ValidationState] {
-                        return validations
-                    }
+        do {
+            let param = FormValidationUseCase.Param(
+                toValidate: toValidate,
+                current: validations
+            )
+            let flowNative = try await asyncFunction(for: invokeNative(param: param))
+            let stream = asyncStream(for: flowNative)
+            for try await validations in stream {
+                if let validations = validations as? [String:ValidationState] {
+                    return validations
                 }
-            } catch {
-                return validations
             }
+        } catch {
+            return validations
         }
         
         return validations

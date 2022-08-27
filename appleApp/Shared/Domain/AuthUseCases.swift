@@ -10,16 +10,14 @@ import common
 
 extension IsSignedInUseCase {
     func perform() async -> Bool {
-        let nativeSuspend = await asyncResult(for: invokeNative(param: nil))
-        if case let .success(nativeFlow) = nativeSuspend {
-            do {
-                let stream = asyncStream(for: nativeFlow)
-                for try await isSignedIn in stream {
-                    return isSignedIn == true
-                }
-            } catch {
-                return false
+        do {
+            let flowNative = try await asyncFunction(for: invokeNative(param: nil))
+            let stream = asyncStream(for: flowNative)
+            for try await isSignedIn in stream {
+                return isSignedIn == true
             }
+        } catch {
+            return false
         }
         
         return false
