@@ -23,7 +23,9 @@ struct LoginView: View {
                     HStack {
                         Image(systemName: "person.fill").foregroundColor(.gray)
                         TextField("Username", text: $uiState.username)
-                            .onChange(of: uiState.username, perform: { validate(.username, value: $0) })
+                            .onChange(of: uiState.username, perform: { value in
+                                validate(.username, value)
+                            })
                             .autocapitalization(.none)
                     }
                     .padding()
@@ -38,7 +40,9 @@ struct LoginView: View {
                     HStack {
                         Image(systemName: "lock.fill").foregroundColor(.gray)
                         SecureField("Password", text: $uiState.password)
-                            .onChange(of: uiState.password, perform: { validate(.password, value: $0) })
+                            .onChange(of: uiState.password, perform: { value in
+                                validate(.password, value)
+                            })
                     }
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
@@ -52,10 +56,10 @@ struct LoginView: View {
                     .disabled(uiState.isSignedInButtonDisabled)
                     .alert(uiState.errorMessage, isPresented: $uiState.isError) {
                         Button("Retry", action: signIn)
-                        Button("Dismiss") {
+                        Button("Dismiss", action: {
                             uiState.isError = false
                             uiState.errorMessage = ""
-                        }
+                        })
                     }
             }
             .padding()
@@ -71,7 +75,7 @@ struct LoginView: View {
 }
 
 extension LoginView {
-    private func validate(_ field: LoginFormSpec, value: String) {
+    private func validate(_ field: LoginFormSpec, _ value: String) {
         Task {
             let toValidate = FieldToValidate(
                 key: field.rawValue,
