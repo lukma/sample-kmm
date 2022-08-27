@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct LoadMoreView: View {
-    var loadMoreAction: () -> Void
-    
     var body: some View {
         ZStack {
             ProgressView("Loading…")
-                .onAppear(perform: loadMoreAction)
         }
         .frame(
             minWidth: 0,
@@ -27,6 +24,6 @@ struct LoadMoreView: View {
 
 struct LoadMoreView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadMoreView(loadMoreAction: {})
+        LoadMoreView()
     }
 }

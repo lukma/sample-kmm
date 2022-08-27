@@ -18,11 +18,18 @@ struct HomeView: View {
             }
             
             if uiState.hasNextPage {
-                LoadMoreView(loadMoreAction: fetchArticles)
+                LoadMoreView()
+                    .task {
+                        await fetchArticles()
+                    }
             }
             
             if uiState.hasError {
-                ErrorView(errorMessage: uiState.errorMessage, retryAction: fetchArticles)
+                ErrorView(errorMessage: uiState.errorMessage) {
+                    Task {
+                        await fetchArticles()
+                    }
+                }
             }
         }
         .listStyle(.sidebar)
@@ -30,39 +37,37 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    func fetchArticles() {
-        Task {
-            uiState.hasError = false
-            uiState.errorMessage = ""
-            
-            let paging = PagingParams<KotlinInt>(
-                key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
-                pageSize: 10
-            )
-            let param = GetArticlesUseCase.Param(paging: paging)
-            let result = await CommonDependencies.shared.getArticlesUseCase.perform(param)
-            switch result {
-            case .success(let paging):
-                if let articles = paging.items as? [Article] {
-                    for article in articles {
-                        uiState.articles.append(article)
-                    }
+    func fetchArticles() async {
+        uiState.hasError = false
+        uiState.errorMessage = ""
+        
+        let paging = PagingParams<KotlinInt>(
+            key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
+            pageSize: 10
+        )
+        let param = GetArticlesUseCase.Param(paging: paging)
+        let result = await CommonDependencies.shared.getArticlesUseCase.perform(param)
+        switch result {
+        case .success(let paging):
+            if let articles = paging.items as? [Article] {
+                for article in articles {
+                    uiState.articles.append(article)
                 }
-                
-                if let total = (paging as? PagingResultNetwork)?.total {
-                    uiState.hasNextPage = uiState.articles.count < total
-                } else {
-                    uiState.hasNextPage = false
-                }
-                
-                if uiState.hasNextPage {
-                    uiState.loadPage += 1
-                }
-            case .failure(let error):
-                uiState.hasNextPage = false
-                uiState.hasError = true
-                uiState.errorMessage = (error as NSError).domain
             }
+            
+            if let total = (paging as? PagingResultNetwork)?.total {
+                uiState.hasNextPage = uiState.articles.count < total
+            } else {
+                uiState.hasNextPage = false
+            }
+            
+            if uiState.hasNextPage {
+                uiState.loadPage += 1
+            }
+        case .failure(let error):
+            uiState.hasNextPage = false
+            uiState.hasError = true
+            uiState.errorMessage = (error as NSError).domain
         }
     }
 }
