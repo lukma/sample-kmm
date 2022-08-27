@@ -9,15 +9,8 @@ import KMPNativeCoroutinesAsync
 import common
 
 extension FormValidationUseCase {
-    func perform(
-        toValidate: FieldToValidate,
-        validations: [String:ValidationState]
-    ) async -> [String:ValidationState] {
+    func perform(_ param: FormValidationUseCase.Param) async -> [String:ValidationState] {
         do {
-            let param = FormValidationUseCase.Param(
-                toValidate: toValidate,
-                current: validations
-            )
             let flowNative = try await asyncFunction(for: invokeNative(param: param))
             let stream = asyncStream(for: flowNative)
             for try await validations in stream {
@@ -26,9 +19,9 @@ extension FormValidationUseCase {
                 }
             }
         } catch {
-            return validations
+            return param.current
         }
         
-        return validations
+        return param.current
     }
 }

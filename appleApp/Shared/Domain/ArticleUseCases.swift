@@ -9,9 +9,8 @@ import KMPNativeCoroutinesAsync
 import common
 
 extension GetArticlesUseCase {
-    func perform(paging: PagingParams<KotlinInt>) async -> Swift.Result<[Article], Error> {
+    func perform(_ param: GetArticlesUseCase.Param) async -> Swift.Result<[Article], Error> {
         do {
-            let param = GetArticlesUseCase.Param(paging: paging)
             let flowNative = try await asyncFunction(for: invokeNative(param: param))
             let stream = asyncStream(for: flowNative)
             for try await paging in stream {

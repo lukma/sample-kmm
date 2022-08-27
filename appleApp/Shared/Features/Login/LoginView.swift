@@ -83,10 +83,11 @@ extension LoginView {
                     (key.rawValue, value)
                 }
             )
-            let result = await CommonDependencies.shared.formValidationUseCase.perform(
+            let param = FormValidationUseCase.Param(
                 toValidate: toValidate,
-                validations: validations
+                current: validations
             )
+            let result = await CommonDependencies.shared.formValidationUseCase.perform(param)
             uiState.validations = [LoginFormSpec:ValidationState](
                 uniqueKeysWithValues: result.compactMap { (key, value) in
                     guard let validationKey = LoginFormSpec(rawValue: key) else { return nil }
@@ -102,10 +103,11 @@ extension LoginView {
             uiState.isError = false
             uiState.errorMessage = ""
             
-            let result = await CommonDependencies.shared.signedInUseCase.perform(
+            let param = SignInUseCase.Param(
                 username: uiState.username,
                 password: uiState.password
             )
+            let result = await CommonDependencies.shared.signedInUseCase.perform(param)
             switch result {
             case .success(_):
                 onSignedIn?()

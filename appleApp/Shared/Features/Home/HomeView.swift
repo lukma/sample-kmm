@@ -36,7 +36,8 @@ extension HomeView {
                 key: NSNumber.init(value: uiState.loadPage) as? KotlinInt,
                 pageSize: 10
             )
-            let result = await CommonDependencies.shared.getArticlesUseCase.perform(paging: paging)
+            let param = GetArticlesUseCase.Param(paging: paging)
+            let result = await CommonDependencies.shared.getArticlesUseCase.perform(param)
             switch result {
             case .success(let articles):
                 uiState.articles = articles

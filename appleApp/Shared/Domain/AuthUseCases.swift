@@ -25,13 +25,9 @@ extension IsSignedInUseCase {
 }
 
 extension SignInUseCase {
-    func perform(username: String, password: String) async -> Swift.Result<Void, Error> {
+    func perform(_ param: SignInUseCase.Param) async -> Swift.Result<Void, Error> {
         var result: Swift.Result<Void, Error> = .failure(NSError(domain: "Unexpected error", code: -1))
         
-        let param = SignInUseCase.Param(
-            username: username,
-            password: password
-        )
         let nativeSuspend = await asyncResult(for: invokeNative(param: param))
         if case let .success(nativeResult) = nativeSuspend {
             if nativeResult.isSuccess() {
