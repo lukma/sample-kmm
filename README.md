@@ -9,12 +9,12 @@ This is **Kotlin Multiplatform** project for learning purpose.
 
 - [Features](#features)
 - [Requirements](#requirements)
-- [Dependencies](#dependencies)
 - [Project Structure](#project-structure)
 
 ## Features
 
-- 
+- [ ] Auth Feature
+- [ ] Article Feature
 
 ## Requirements
 
@@ -22,10 +22,6 @@ This is **Kotlin Multiplatform** project for learning purpose.
 - Android 6+
 - iOS 13+
 - Swift 5.3+
-
-## Dependencies
-
-- 
 
 ## Project Structure
 

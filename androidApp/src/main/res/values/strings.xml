@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">GPlay</string>
+
+    <!-- Button -->
+    <string name="button_signin">Sign In</string>
+</resources>

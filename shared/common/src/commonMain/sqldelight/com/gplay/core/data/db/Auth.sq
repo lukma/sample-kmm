@@ -1,0 +1,22 @@
+CREATE TABLE auth (
+  username TEXT NOT NULL PRIMARY KEY,
+  accessToken TEXT NOT NULL,
+  refreshToken TEXT NOT NULL,
+  tokenType TEXT NOT NULL,
+  expiresIn TEXT NOT NULL,
+  isActive INTEGER AS kotlin.Boolean NOT NULL
+);
+
+deactiveCurrent:
+UPDATE auth
+SET isActive=0
+WHERE isActive=1;
+
+upsert:
+INSERT OR REPLACE INTO auth(username, accessToken, refreshToken, tokenType, expiresIn, isActive)
+VALUES ?;
+
+findByCurrentActive:
+SELECT accessToken, refreshToken, tokenType, expiresIn
+FROM auth
+WHERE isActive=1;
