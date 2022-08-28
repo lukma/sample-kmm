@@ -21,6 +21,9 @@
 		A73BCB7728AD0860003AB2DC /* GPlayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73BCB4E28AD0860003AB2DC /* GPlayApp.swift */; };
 		A73BCB7A28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
 		A73BCB7B28AD0860003AB2DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A73BCB5028AD0860003AB2DC /* Assets.xcassets */; };
+		A75F07DE28BADD410085C327 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = A75F07DD28BADD410085C327 /* FlowStacks */; };
+		A75F07E028BADD6F0085C327 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = A75F07DF28BADD6F0085C327 /* KMPNativeCoroutinesAsync */; };
+		A75F07E228BADD820085C327 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A75F07E128BADD820085C327 /* Lottie */; };
 		A76142FB28B6665F001A3E20 /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = A76142FA28B6665F001A3E20 /* KMPNativeCoroutinesAsync */; };
 		A77B016528B2AFBA00A32221 /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B016428B2AFBA00A32221 /* ValidationExtensions.swift */; };
 		A77B016628B2AFBA00A32221 /* ValidationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77B016428B2AFBA00A32221 /* ValidationExtensions.swift */; };
@@ -110,6 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75F07E028BADD6F0085C327 /* KMPNativeCoroutinesAsync in Frameworks */,
+				A75F07DE28BADD410085C327 /* FlowStacks in Frameworks */,
+				A75F07E228BADD820085C327 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +313,11 @@
 			dependencies = (
 			);
 			name = "GPlay (macOS)";
+			packageProductDependencies = (
+				A75F07DD28BADD410085C327 /* FlowStacks */,
+				A75F07DF28BADD6F0085C327 /* KMPNativeCoroutinesAsync */,
+				A75F07E128BADD820085C327 /* Lottie */,
+			);
 			productName = "GPlay (macOS)";
 			productReference = A73BCB5B28AD0860003AB2DC /* GPlay.app */;
 			productType = "com.apple.product-type.application";
@@ -1286,6 +1297,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A75F07DD28BADD410085C327 /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7C4E64B28B3EF4E00CB35AD /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
+		};
+		A75F07DF28BADD6F0085C327 /* KMPNativeCoroutinesAsync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A76142F928B6665F001A3E20 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			productName = KMPNativeCoroutinesAsync;
+		};
+		A75F07E128BADD820085C327 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A77B017928B2BF4C00A32221 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		A76142FA28B6665F001A3E20 /* KMPNativeCoroutinesAsync */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A76142F928B6665F001A3E20 /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
