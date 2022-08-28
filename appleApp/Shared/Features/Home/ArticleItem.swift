@@ -13,8 +13,26 @@ struct ArticleItem: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: article.thumbnail))
-                .aspectRatio(contentMode: .fit)
+            AsyncImage(url: URL(string: article.thumbnail)) { phase in
+                switch phase {
+                case .empty:
+                    ZStack(alignment: .center) {
+                        Color.black
+                            .opacity(0.3)
+                            .edgesIgnoringSafeArea(.all)
+                        ProgressView()
+                    }
+                case .success(let image):
+                    image.resizable()
+                        .scaledToFit()
+                        .frame(minHeight: 300)
+                case .failure:
+                    Image(systemName: "photo")
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .frame(minHeight: 300)
             
             Text(article.title)
                 .font(.title)
