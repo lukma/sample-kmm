@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class IosAppDelegate: NSObject, UIApplicationDelegate, DelegateHelper {
+class IosAppDelegate: NSObject, UIApplicationDelegate, AppDelegateHelper {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         initKoin()
         return true

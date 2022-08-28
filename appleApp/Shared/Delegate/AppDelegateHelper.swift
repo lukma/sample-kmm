@@ -1,5 +1,5 @@
 //
-//  DelegateHelper.swift
+//  AppDelegateHelper.swift
 //  GPlay
 //
 //  Created by Lukma Gayo Arizky on 28/08/22.
@@ -7,9 +7,9 @@
 
 import common
 
-protocol DelegateHelper { }
+protocol AppDelegateHelper { }
 
-extension DelegateHelper {
+extension AppDelegateHelper {
     func initKoin() {
         let appConfig = AppConfig(
             apiHost: APIConfiguration.shared.apiHost,

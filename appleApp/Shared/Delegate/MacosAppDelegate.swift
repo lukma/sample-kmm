@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MacosAppDelegate: NSObject, NSApplicationDelegate, DelegateHelper {
+class MacosAppDelegate: NSObject, NSApplicationDelegate, AppDelegateHelper {
     func applicationWillFinishLaunching(_ notification: Notification) {
         initKoin()
     }

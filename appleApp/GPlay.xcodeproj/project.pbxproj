@@ -26,8 +26,8 @@
 		A75F07E228BADD820085C327 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A75F07E128BADD820085C327 /* Lottie */; };
 		A75F07E428BAE85D0085C327 /* IosAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07E328BAE85D0085C327 /* IosAppDelegate.swift */; };
 		A75F07E628BAE88A0085C327 /* MacosAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07E528BAE88A0085C327 /* MacosAppDelegate.swift */; };
-		A75F07EC28BAEA760085C327 /* DelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07EB28BAEA760085C327 /* DelegateHelper.swift */; };
-		A75F07ED28BAEA760085C327 /* DelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07EB28BAEA760085C327 /* DelegateHelper.swift */; };
+		A75F07EC28BAEA760085C327 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07EB28BAEA760085C327 /* AppDelegateHelper.swift */; };
+		A75F07ED28BAEA760085C327 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07EB28BAEA760085C327 /* AppDelegateHelper.swift */; };
 		A75F07F328BAEC540085C327 /* IosLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07F228BAEC540085C327 /* IosLottieView.swift */; };
 		A75F07F528BAEC670085C327 /* MacosLottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07F428BAEC670085C327 /* MacosLottieView.swift */; };
 		A75F07FE28BAF4A40085C327 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F07FD28BAF4A40085C327 /* LottieAnimation.swift */; };
@@ -93,7 +93,7 @@
 		A73BCB7428AD0860003AB2DC /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		A75F07E328BAE85D0085C327 /* IosAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosAppDelegate.swift; sourceTree = "<group>"; };
 		A75F07E528BAE88A0085C327 /* MacosAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacosAppDelegate.swift; sourceTree = "<group>"; };
-		A75F07EB28BAEA760085C327 /* DelegateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHelper.swift; sourceTree = "<group>"; };
+		A75F07EB28BAEA760085C327 /* AppDelegateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateHelper.swift; sourceTree = "<group>"; };
 		A75F07F228BAEC540085C327 /* IosLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosLottieView.swift; sourceTree = "<group>"; };
 		A75F07F428BAEC670085C327 /* MacosLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacosLottieView.swift; sourceTree = "<group>"; };
 		A75F07FD28BAF4A40085C327 /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		A75F07E728BAE9EC0085C327 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				A75F07EB28BAEA760085C327 /* DelegateHelper.swift */,
+				A75F07EB28BAEA760085C327 /* AppDelegateHelper.swift */,
 				A75F07E328BAE85D0085C327 /* IosAppDelegate.swift */,
 				A75F07E528BAE88A0085C327 /* MacosAppDelegate.swift */,
 			);
@@ -520,7 +520,7 @@
 				A77B016D28B2B08A00A32221 /* HomeView.swift in Sources */,
 				A7C4E65C28B3F7DA00CB35AD /* AppCoordinator.swift in Sources */,
 				A7AFCBF528B9601100F9F890 /* ValidationUseCases.swift in Sources */,
-				A75F07EC28BAEA760085C327 /* DelegateHelper.swift in Sources */,
+				A75F07EC28BAEA760085C327 /* AppDelegateHelper.swift in Sources */,
 				A77B016528B2AFBA00A32221 /* ValidationExtensions.swift in Sources */,
 				A75F07F328BAEC540085C327 /* IosLottieView.swift in Sources */,
 				A75F07FE28BAF4A40085C327 /* LottieAnimation.swift in Sources */,
@@ -545,7 +545,7 @@
 				A75F07E628BAE88A0085C327 /* MacosAppDelegate.swift in Sources */,
 				A77B016E28B2B08A00A32221 /* HomeView.swift in Sources */,
 				A7C4E65D28B3F7DA00CB35AD /* AppCoordinator.swift in Sources */,
-				A75F07ED28BAEA760085C327 /* DelegateHelper.swift in Sources */,
+				A75F07ED28BAEA760085C327 /* AppDelegateHelper.swift in Sources */,
 				A75F07F528BAEC670085C327 /* MacosLottieView.swift in Sources */,
 				A7AFCBF628B9601100F9F890 /* ValidationUseCases.swift in Sources */,
 				A75F07FF28BAF4A40085C327 /* LottieAnimation.swift in Sources */,
