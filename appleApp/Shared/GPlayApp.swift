@@ -9,7 +9,12 @@ import SwiftUI
 
 @main
 struct GPlayApp: App {
-    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
+    #if os(iOS)
+        @UIApplicationDelegateAdaptor private var appDelegate: IosAppDelegate
+    #elseif os(OSX)
+        @NSApplicationDelegateAdaptor var appDelegate: MacosAppDelegate
+    #endif
 
     var body: some Scene {
         WindowGroup {
