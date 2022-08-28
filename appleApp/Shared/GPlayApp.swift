@@ -11,9 +11,9 @@ import SwiftUI
 struct GPlayApp: App {
     
     #if os(iOS)
-        @UIApplicationDelegateAdaptor private var appDelegate: IosAppDelegate
+    @UIApplicationDelegateAdaptor var appDelegate: IosAppDelegate
     #elseif os(OSX)
-        @NSApplicationDelegateAdaptor var appDelegate: MacosAppDelegate
+    @NSApplicationDelegateAdaptor var appDelegate: MacosAppDelegate
     #endif
 
     var body: some Scene {
