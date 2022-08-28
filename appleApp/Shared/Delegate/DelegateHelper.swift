@@ -12,7 +12,8 @@ protocol DelegateHelper { }
 extension DelegateHelper {
     func initKoin() {
         let appConfig = AppConfig(
-            apiHost: APIConfiguration.shared.apiHost
+            apiHost: APIConfiguration.shared.apiHost,
+            apiPrefixPath: APIConfiguration.shared.apiPrefixPath
         )
         KoinKt.doInitKoin(appConfig: appConfig)
     }

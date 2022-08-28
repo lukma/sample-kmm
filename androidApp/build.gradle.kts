@@ -27,6 +27,11 @@ android {
                 "API_HOST",
                 "\"${apiProp.getProperty("DEV_API_HOST")}\""
             )
+            buildConfigField(
+                "String",
+                "API_PREFIX_PATH",
+                "\"${apiProp.getProperty("DEV_API_PREFIX_PATH")}\""
+            )
         }
     }
 }

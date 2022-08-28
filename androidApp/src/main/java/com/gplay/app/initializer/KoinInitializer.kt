@@ -13,6 +13,7 @@ class KoinInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         val appConfig = AppConfig(
             apiHost = BuildConfig.API_HOST,
+            apiPrefixPath = BuildConfig.API_PREFIX_PATH,
         )
         initKoin(appConfig) {
             androidContext(context)

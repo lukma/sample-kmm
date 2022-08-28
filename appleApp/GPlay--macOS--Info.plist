@@ -10,8 +10,6 @@
         <dict>
             <key>virtserver.swaggerhub.com</key>
             <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
                 <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
             </dict>

@@ -11,9 +11,18 @@ class APIConfiguration {
     var apiHost: String {
         switch BuildConfiguration.shared.environment {
         case .debugMock, .releaseMock:
-            return "virtserver.swaggerhub.com/lukma/gplay"
+            return "virtserver.swaggerhub.com"
         case .debugDevelopment, .releaseDevelopment:
-            return "api.gplay.com"
+            return "api.dev.gplay.com"
+        }
+    }
+    
+    var apiPrefixPath: String {
+        switch BuildConfiguration.shared.environment {
+        case .debugMock, .releaseMock:
+            return "/lukma/gplay/"
+        case .debugDevelopment, .releaseDevelopment:
+            return ""
         }
     }
 }

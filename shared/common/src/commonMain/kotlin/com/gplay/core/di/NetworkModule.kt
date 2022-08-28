@@ -11,8 +11,9 @@ internal val networkModule = module {
     single(named(HttpClientQualifier.Simple)) {
         SimpleHttpClient(get()) {
             defaultRequest {
-                url.protocol = URLProtocol.HTTPS
                 host = get<AppConfig>().apiHost
+                url.protocol = URLProtocol.HTTPS
+                url.encodedPath = get<AppConfig>().apiPrefixPath
             }
         }
     }
