@@ -26,7 +26,9 @@ struct LoginView: View {
                             .onChange(of: uiState.username, perform: { value in
                                 validate(.username, value)
                             })
+                            #if os(iOS)
                             .autocapitalization(.none)
+                            #endif
                     }
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
